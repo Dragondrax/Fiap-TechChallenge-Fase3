@@ -1,16 +1,11 @@
-﻿using Fiap.TechChallenge.Fase1.Aplicacao.DDDRegiao;
-using Fiap.TechChallenge.Fase1.Aplicacao;
+﻿using Fiap.TechChallenge.Fase1.Aplicacao;
+using Fiap.TechChallenge.Fase1.Aplicacao.DDDRegiao;
 using Fiap.TechChallenge.Fase1.Data.Context;
 using Fiap.TechChallenge.Fase1.Data.Repository;
 using Fiap.TechChallenge.Fase1.Dominio;
 using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fiap.TechChallenge.Fase1.IoC
 {

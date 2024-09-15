@@ -17,6 +17,7 @@
     <ProjectReference Include="..\..\Core\Fiap.TechChallenge.Fase1.SharedKernel\Fiap.TechChallenge.Fase1.SharedKernel.csproj" />
     <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Data\Fiap.TechChallenge.Fase1.Data.csproj" />
     <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Dominio\Fiap.TechChallenge.Fase1.Dominio.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.IoC\Fiap.TechChallenge.Fase1.IoC.csproj" />
     <ProjectReference Include="..\Fiap.TechChallenge.Fase3.Workers\Fiap.TechChallenge.Fase3.RabbitMQ.csproj" />
   </ItemGroup>
 </Project>

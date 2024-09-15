@@ -1,9 +1,12 @@
 using Fiap.TechChallenge.Fase1.Data.Context;
+using Fiap.TechChallenge.Fase1.IoC;
 using Fiap.TechChallenge.Fase3.Deletar;
 using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddHostedService<Worker>();
+
+InjecaoDependenciaWorkers.ResolverDependencia(builder.Services);
 
 builder.Services.AddDbContext<ContextTechChallenge>(options =>
 {

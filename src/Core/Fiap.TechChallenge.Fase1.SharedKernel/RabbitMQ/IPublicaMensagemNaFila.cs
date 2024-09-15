@@ -2,6 +2,6 @@
 {
     public interface IPublicaMensagemNaFila
     {
-        Task PublicarMensagem(string fila, string exchange, object messageBody);
+        Task<bool> PublicarMensagem(string fila, string exchange, object messageBody);
     }
 }
