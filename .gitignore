@@ -426,3 +426,7 @@ FodyWeavers.xsd
 /src/Tests/Fiap.TechChallenge.Fase1.Integration.Test/obj
 /src/WebApi/Fiap.TechChallenge.Fase1.Integracao.Tests/obj
 /data/postgres
+/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Persistencia.AssemblyInfo.cs
+/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Fiap.TechChallenge.Fase3.Persistencia.csproj.nuget.dgspec.json
+/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Fiap.TechChallenge.Fase3.Persistencia.csproj.nuget.g.targets
+/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/project.assets.json
