@@ -150,3 +150,5 @@ volumes:
   zabbix-snmptraps-data:
   zabbix-export-data:
   zabbix-web-data:
+  rabbitmq_data:
+  rabbitmq_log:
