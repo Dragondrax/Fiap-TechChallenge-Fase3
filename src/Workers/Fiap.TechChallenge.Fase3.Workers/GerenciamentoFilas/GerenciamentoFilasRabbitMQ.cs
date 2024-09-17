@@ -46,6 +46,24 @@ namespace Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas
                       ExchangeString,
                       FilasPersistencia.ExcluirUsuarioDeadLetter,
                       ExchangeDeadLetterString);
+
+            CriarFila(channel,
+                      FilasContatos.CriarContatoService,
+                      ExchangeString,
+                      FilasContatos.CriarContatoServiceDeadLetter,
+                      ExchangeDeadLetterString);
+
+            CriarFila(channel,
+                      FilasContatos.AtualizarContatoService,
+                      ExchangeString,
+                      FilasContatos.AtualizarContatoServiceDeadLetter,
+                      ExchangeDeadLetterString);
+
+            CriarFila(channel,
+                      FilasContatos.DeletarContatoService,
+                      ExchangeString,
+                      FilasContatos.DeletarContatoServiceDeadLetter,
+                      ExchangeDeadLetterString);
         }
         private void CriarFila(IModel channel, string fila, string exchange, string filaDeadLetter, string exchangeDeadLetter)
         {

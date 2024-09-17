@@ -21,6 +21,7 @@ namespace Fiap.TechChallenge.Fase3.Deletar
         {
             var connection = _configuracoesRabbit.AbrirConexaoRabbitMQ();
             var channel = connection.CreateModel();
+            channel.BasicQos(0, 1, false);
 
             _gerenciamentoFila.CriarFilas(channel);
             _consumer.ConsumerEnviarNotificacao(channel);

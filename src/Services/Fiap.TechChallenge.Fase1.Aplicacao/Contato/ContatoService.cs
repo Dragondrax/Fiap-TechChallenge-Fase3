@@ -141,7 +141,7 @@ public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoServ
             return new ResponseModel(_mensagem, false, null);
         }
 
-        contato.AlterarDDDRegiao(contatoDTO.Nome, contatoDTO.DDD, contatoDTO.Telefone, contatoDTO.Email.ToLower());
+        contato.AlterarContato(contatoDTO.Nome, contatoDTO.DDD, contatoDTO.Telefone, contatoDTO.Email.ToLower());
 
         await _contatoRepository.AtualizarAsync(contato);
 
@@ -161,7 +161,7 @@ public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoServ
 
         if (contato is not null)
         {
-            contato.ExcluirDDDRegiao();
+            contato.ExcluirContato();
 
             await _contatoRepository.RemoverAsync(contato);
 
