@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
@@ -17,6 +19,7 @@
     <ProjectReference Include="..\..\Core\Fiap.TechChallenge.Fase1.SharedKernel\Fiap.TechChallenge.Fase1.SharedKernel.csproj" />
     <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Data\Fiap.TechChallenge.Fase1.Data.csproj" />
     <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Dominio\Fiap.TechChallenge.Fase1.Dominio.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.IoC\Fiap.TechChallenge.Fase1.IoC.csproj" />
     <ProjectReference Include="..\Fiap.TechChallenge.Fase3.Workers\Fiap.TechChallenge.Fase3.RabbitMQ.csproj" />
   </ItemGroup>
 </Project>

@@ -5,47 +5,65 @@ namespace Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas
 {
     public class GerenciamentoFilasRabbitMQ : IGerenciamentoFilasRabbitMQ
     {
-        private string Exchange = "techchallenge";
-        private string ExchangeDeadLetter = "techchallenge.deadletter";
+        private string ExchangeString = Exchange.ValorExchange;
+        private string ExchangeDeadLetterString = Exchange.ValorExchangeDeadLetter;
 
         public void CriarFilas(IModel channel)
         {
             DeclararExchange(channel);
             CriarFila(channel,
                       FilasPersistencia.CriarContato,
-                      Exchange,
+                      ExchangeString,
                       FilasPersistencia.CriarContatoDeadLetter,
-                      ExchangeDeadLetter);
+                      ExchangeDeadLetterString);
 
             CriarFila(channel,
                       FilasPersistencia.CriarUsuario,
-                      Exchange,
+                      ExchangeString,
                       FilasPersistencia.CriarUsuarioDeadLetter,
-                      ExchangeDeadLetter);
+                      ExchangeDeadLetterString);
 
             CriarFila(channel,
                       FilasPersistencia.AtualizarContato,
-                      Exchange,
+                      ExchangeString,
                       FilasPersistencia.AtualizarContatoDeadLetter,
-                      ExchangeDeadLetter);
+                      ExchangeDeadLetterString);
 
             CriarFila(channel,
                       FilasPersistencia.AtualizarUsuario,
-                      Exchange,
+                      ExchangeString,
                       FilasPersistencia.AtualizarUsuarioDeadLetter,
-                      ExchangeDeadLetter);
+                      ExchangeDeadLetterString);
 
             CriarFila(channel,
                       FilasPersistencia.ExcluirContato,
-                      Exchange,
+                      ExchangeString,
                       FilasPersistencia.ExcluirContatoDeadLetter,
-                      ExchangeDeadLetter);
+                      ExchangeDeadLetterString);
 
             CriarFila(channel,
                       FilasPersistencia.ExcluirUsuario,
-                      Exchange,
+                      ExchangeString,
                       FilasPersistencia.ExcluirUsuarioDeadLetter,
-                      ExchangeDeadLetter);
+                      ExchangeDeadLetterString);
+
+            CriarFila(channel,
+                      FilasContatos.CriarContatoService,
+                      ExchangeString,
+                      FilasContatos.CriarContatoServiceDeadLetter,
+                      ExchangeDeadLetterString);
+
+            CriarFila(channel,
+                      FilasContatos.AtualizarContatoService,
+                      ExchangeString,
+                      FilasContatos.AtualizarContatoServiceDeadLetter,
+                      ExchangeDeadLetterString);
+
+            CriarFila(channel,
+                      FilasContatos.DeletarContatoService,
+                      ExchangeString,
+                      FilasContatos.DeletarContatoServiceDeadLetter,
+                      ExchangeDeadLetterString);
         }
         private void CriarFila(IModel channel, string fila, string exchange, string filaDeadLetter, string exchangeDeadLetter)
         {
@@ -67,8 +85,8 @@ namespace Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas
         }
         private void DeclararExchange(IModel channel)
         {
-            channel.ExchangeDeclare(Exchange, "direct", true, false);
-            channel.ExchangeDeclare(ExchangeDeadLetter, "direct", true, false);
+            channel.ExchangeDeclare(ExchangeString, "direct", true, false);
+            channel.ExchangeDeclare(ExchangeDeadLetterString, "direct", true, false);
         }
         private Dictionary<string, object> ObterArgumentoDaFila(string fila, string exchangeDeadLetter)
         {

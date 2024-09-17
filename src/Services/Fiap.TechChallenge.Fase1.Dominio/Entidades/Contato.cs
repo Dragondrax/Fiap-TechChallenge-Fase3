@@ -20,7 +20,7 @@ namespace Fiap.TechChallenge.Fase1.Dominio.Entidades
             AtualizarDtCadastro();
         }
 
-        public void AlterarDDDRegiao(string nome, int DDD, string telefone, string email)
+        public void AlterarContato(string nome, int DDD, string telefone, string email)
         {
             Nome = nome;
             this.DDD = DDD;
@@ -29,7 +29,7 @@ namespace Fiap.TechChallenge.Fase1.Dominio.Entidades
             AtualizarDtAlteracao();
         }
 
-        public void ExcluirDDDRegiao()
+        public void ExcluirContato()
         {
             Exclusao();
         }
