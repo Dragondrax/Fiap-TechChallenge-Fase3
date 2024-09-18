@@ -19,7 +19,6 @@ public class ContatoController(IContatoService contatoService, IPublicaMensagemN
     [HttpPost("CriarContato")]
     public async Task<IActionResult> SalvarNovoContato([FromBody] CriarAlterarContatoDTO contatoDTO)
     {
-        //var resultado = await _contatoService.SalvarContato(contatoDTO);
         var resultado  = await _publicarMensagem.PublicarMensagem(FilasContatos.CriarContatoService, Exchange.ValorExchange, contatoDTO);
         if (resultado)
             return Ok(resultado);
@@ -59,32 +58,27 @@ public class ContatoController(IContatoService contatoService, IPublicaMensagemN
     }
 
     [HttpPut("AlterarContato")]
-    public async Task<IActionResult> AtualizarContato(CriarAlterarContatoDTO contatoDTO)
+    public async Task<IActionResult> AtualizarContato([FromBody] CriarAlterarContatoDTO contatoDTO)
     {
-        var resultado = await _contatoService.AlterarContato(contatoDTO);
-
-        if (resultado.Sucesso)
+        var resultado = await _publicarMensagem.PublicarMensagem(FilasContatos.AtualizarContatoService, Exchange.ValorExchange, contatoDTO);
+        if (resultado)
             return Ok(resultado);
-        else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Any(x => string.IsNullOrEmpty(x)))
-            return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
-        else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Contains("Ops, email não foi encontrado em nosso banco de dados!"))
-            return NotFound(resultado);
         else
-            return BadRequest(resultado);
+            return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
     }
 
     [HttpDelete("RemoverContato")]
     public async Task<IActionResult> RemoverContato(Guid id)
     {
-        var resultado = await _contatoService.RemoverContato(id);
+        var apagarContatoDto = new DeletarContatoDto
+        {
+            Id = id
+        };
 
-        if (resultado.Sucesso)
+        var resultado = await _publicarMensagem.PublicarMensagem(FilasContatos.DeletarContatoService, Exchange.ValorExchange, apagarContatoDto);
+        if (resultado)
             return Ok(resultado);
-        else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Any(x => string.IsNullOrEmpty(x)))
-            return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
-        else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Contains("Ops, parece que não encontramos o contato em nossa base de dados!"))
-            return NotFound(resultado);
         else
-            return BadRequest(resultado);
+            return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
     }
 }

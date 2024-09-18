@@ -53,11 +53,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workers", "Workers", "{8807
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Fase3.RabbitMQ", "..\..\Workers\Fiap.TechChallenge.Fase3.Workers\Fiap.TechChallenge.Fase3.RabbitMQ.csproj", "{E6EEDA9E-A2F1-466B-A65B-66802FA569E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Fase3.Usuario", "..\..\Workers\Fiap.TechChallenge.Fase3.Cadastrar\Fiap.TechChallenge.Fase3.Usuario.csproj", "{EBB4CDAE-B860-4532-8AE2-2E15CE5CF206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Fase3.Persistencia", "..\..\Workers\Fiap.TechChallenge.Fase3.Deletar\Fiap.TechChallenge.Fase3.Persistencia.csproj", "{F4E54800-8E04-4224-86B1-C61BC88CA007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Fase3.Persistencia", "..\..\Workers\Fiap.TechChallenge.Fase3.Deletar\Fiap.TechChallenge.Fase3.Persistencia.csproj", "{F4E54800-8E04-4224-86B1-C61BC88CA007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Fase3.Contato", "..\..\Workers\Fiap.TechChallenge.Fase3.Atualizar\Fiap.TechChallenge.Fase3.Contato.csproj", "{914ED11E-92F4-499A-9BC1-B73B31736164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Fase3.Contato", "..\..\Workers\Fiap.TechChallenge.Fase3.Atualizar\Fiap.TechChallenge.Fase3.Contato.csproj", "{914ED11E-92F4-499A-9BC1-B73B31736164}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Fase3.Usuario", "..\..\Workers\Fiap.TechChallenge.Fase3.Usuario\Fiap.TechChallenge.Fase3.Usuario.csproj", "{389CAC46-8F18-48E2-95B6-0C740D1D7556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,10 +105,6 @@ Global
 		{E6EEDA9E-A2F1-466B-A65B-66802FA569E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6EEDA9E-A2F1-466B-A65B-66802FA569E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6EEDA9E-A2F1-466B-A65B-66802FA569E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBB4CDAE-B860-4532-8AE2-2E15CE5CF206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBB4CDAE-B860-4532-8AE2-2E15CE5CF206}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBB4CDAE-B860-4532-8AE2-2E15CE5CF206}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBB4CDAE-B860-4532-8AE2-2E15CE5CF206}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F4E54800-8E04-4224-86B1-C61BC88CA007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4E54800-8E04-4224-86B1-C61BC88CA007}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4E54800-8E04-4224-86B1-C61BC88CA007}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -117,6 +113,10 @@ Global
 		{914ED11E-92F4-499A-9BC1-B73B31736164}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{914ED11E-92F4-499A-9BC1-B73B31736164}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{914ED11E-92F4-499A-9BC1-B73B31736164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{389CAC46-8F18-48E2-95B6-0C740D1D7556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{389CAC46-8F18-48E2-95B6-0C740D1D7556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{389CAC46-8F18-48E2-95B6-0C740D1D7556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{389CAC46-8F18-48E2-95B6-0C740D1D7556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,9 +137,9 @@ Global
 		{B7CB429F-B397-428B-BA1B-72F9AF4B1F8E} = {B6DBC303-74AA-43B7-A200-4F2169756EAC}
 		{8807E529-80E5-44F2-8055-C893E78F498F} = {B0899FF5-553E-4C6B-B451-5D41794EDCCB}
 		{E6EEDA9E-A2F1-466B-A65B-66802FA569E1} = {8807E529-80E5-44F2-8055-C893E78F498F}
-		{EBB4CDAE-B860-4532-8AE2-2E15CE5CF206} = {8807E529-80E5-44F2-8055-C893E78F498F}
 		{F4E54800-8E04-4224-86B1-C61BC88CA007} = {8807E529-80E5-44F2-8055-C893E78F498F}
 		{914ED11E-92F4-499A-9BC1-B73B31736164} = {8807E529-80E5-44F2-8055-C893E78F498F}
+		{389CAC46-8F18-48E2-95B6-0C740D1D7556} = {8807E529-80E5-44F2-8055-C893E78F498F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2BC0ED8-2DC4-41E5-B2C4-5DBAE37E495A}
