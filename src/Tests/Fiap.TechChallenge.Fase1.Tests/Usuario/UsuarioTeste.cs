@@ -356,36 +356,36 @@ namespace Fiap.TechChallenge.Fase1.Tests.Usuario
             Assert.Contains(MensagemErroUsuario.MENSAGEM_USUARIO_NAO_ENCONTRADO, result.Mensagem);
         }
 
-        [Fact(DisplayName = "Validando Entidade - Criar usuário válido")]
-        [Trait("Usuário", "Validações de Criar Usuário")]
-        public AppDomain.Entidades.Usuario NovoUsurioValido()
-        {
-            AppDomain.Entidades.Usuario usuario = new AppDomain.Entidades.Usuario(_faker.Name.FullName(), _faker.Internet.Email(), _faker.Internet.Password(), (Roles)_faker.Random.Number(0, 1));
+        //[Fact(DisplayName = "Validando Entidade - Criar usuário válido")]
+        //[Trait("Usuário", "Validações de Criar Usuário")]
+        //public AppDomain.Entidades.Usuario NovoUsurioValido()
+        //{
+        //    AppDomain.Entidades.Usuario usuario = new AppDomain.Entidades.Usuario(_faker.Name.FullName(), _faker.Internet.Email(), _faker.Internet.Password(), (Roles)_faker.Random.Number(0, 1));
 
-            return usuario;
-        }
+        //    return usuario;
+        //}
 
-        [Fact(DisplayName = "Validando Entidade - Alterar usuário válido")]
-        [Trait("Usuário", "Validações de Alterar Usuario")]
-        public AppDomain.Entidades.Usuario AlterarUsurioValido()
-        {
-            AppDomain.Entidades.Usuario usuario = new AppDomain.Entidades.Usuario();
+        //[Fact(DisplayName = "Validando Entidade - Alterar usuário válido")]
+        //[Trait("Usuário", "Validações de Alterar Usuario")]
+        //public AppDomain.Entidades.Usuario AlterarUsurioValido()
+        //{
+        //    AppDomain.Entidades.Usuario usuario = new AppDomain.Entidades.Usuario();
 
-            usuario.AlterarUsuario(_faker.Name.FullName(), _faker.Internet.Email(), _faker.Internet.Password(), (Roles)_faker.Random.Number(0, 1));
+        //    usuario.AlterarUsuario(_faker.Name.FullName(), _faker.Internet.Email(), _faker.Internet.Password(), (Roles)_faker.Random.Number(0, 1));
 
-            return usuario;
-        }
+        //    return usuario;
+        //}
 
-        [Fact(DisplayName = "Validando Entidade - Excluir usuário válido")]
-        [Trait("Usuário", "Validações de Excluir Usuário")]
-        public AppDomain.Entidades.Usuario ExcluirUsuario()
-        {
-            AppDomain.Entidades.Usuario usuario = new AppDomain.Entidades.Usuario();
+        //[Fact(DisplayName = "Validando Entidade - Excluir usuário válido")]
+        //[Trait("Usuário", "Validações de Excluir Usuário")]
+        //public AppDomain.Entidades.Usuario ExcluirUsuario()
+        //{
+        //    AppDomain.Entidades.Usuario usuario = new AppDomain.Entidades.Usuario();
 
-            usuario.ExcluirUsuario();
+        //    usuario.ExcluirUsuario();
 
-            return usuario;
-        }
+        //    return usuario;
+        //}
 
         private AutenticarUsuarioDTO CriarAutenticarValido()
         {

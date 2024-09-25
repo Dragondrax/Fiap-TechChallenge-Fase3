@@ -1,4 +1,5 @@
 ﻿using Fiap.TechChallenge.Fase1.Dominio.Entidades;
+using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Contato;
 using Fiap.TechChallenge.Fase1.SharedKernel.Filas;
 using Fiap.TechChallenge.Fase3.Persistencia.Services;
 using RabbitMQ.Client;
@@ -12,9 +13,11 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
     {
         private readonly IPersistirContatoRepository _persistirContatoRepository;
         public Consumers(IPersistirContatoRepository persistirContatoRepository)
-        {
-            _persistirContatoRepository = persistirContatoRepository;
+        { 
+          _persistirContatoRepository = persistirContatoRepository;
+
         }
+
         public void ConsumerAtualizarContato(IModel channel)
         {
             var consumer = new EventingBasicConsumer(channel);
@@ -29,7 +32,7 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
                 };
                 var dadosMensagem = JsonSerializer.Deserialize<Contato>(message, options);
 
-                var result = await _persistirContatoRepository.Handle(dadosMensagem);
+                var result = await _persistirContatoRepository.AlterarContatoRepository(dadosMensagem);
 
                 if (result)
                     channel.BasicAck(ea.DeliveryTag, false);
@@ -49,7 +52,29 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
 
         public void ConsumerCadastrarContato(IModel channel)
         {
-            throw new NotImplementedException();
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += async (model, ea) =>
+            {
+                byte[] body = ea.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var dadosMensagem = JsonSerializer.Deserialize<Contato>(message, options);
+
+                var result = await _persistirContatoRepository.CadastrarContatoRepository(dadosMensagem);
+
+                if (result)
+                    channel.BasicAck(ea.DeliveryTag, false);
+                else
+                    channel.BasicReject(ea.DeliveryTag, false);
+            };
+
+            channel.BasicConsume(queue: FilasPersistencia.CriarContato,
+                                 autoAck: false,
+                                 consumer: consumer);
         }
 
         public void ConsumerCadastrarUsuario(IModel channel)
@@ -59,7 +84,7 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
 
         public void ConsumerDeletarContato(IModel channel)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void ConsumerDeletarUsuario(IModel channel)
