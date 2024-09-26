@@ -5,23 +5,20 @@ using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario;
 using Fiap.TechChallenge.Fase1.Infraestructure.Enum;
 using Fiap.TechChallenge.Fase1.SharedKernel;
+using Fiap.TechChallenge.Fase1.SharedKernel.Filas;
 using Fiap.TechChallenge.Fase1.SharedKernel.Model;
+using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using static BCrypt.Net.BCrypt;
 
 namespace Fiap.TechChallenge.Fase1.Aplicacao
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService, IPublicaMensagemNaFila publicarMensagem) : IUsuarioService
     {
-        private readonly IUsuarioRepository _usuarioRepository;
-        private readonly ITokenService _tokenService;
+        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
+        private readonly ITokenService _tokenService = tokenService;
+        private readonly IPublicaMensagemNaFila _publicarMensagem = publicarMensagem;
         private List<string> _mensagem = new List<string>();
         private const int WorkFactor = 12;
-
-        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService)
-        {
-            _usuarioRepository = usuarioRepository;
-            _tokenService = tokenService;
-        }
 
         public async Task<ResponseModel> SalvarUsuario(CriarAlterarUsuarioDTO usuarioDTO)
         {
@@ -40,7 +37,8 @@ namespace Fiap.TechChallenge.Fase1.Aplicacao
 
                 Usuario novoUsuario = new (usuarioDTO.Nome, usuarioDTO.Email.ToLower(), hashSenha, usuarioDTO.Role);
 
-                await _usuarioRepository.AdicionarAsync(novoUsuario);
+                //await _usuarioRepository.AdicionarAsync(novoUsuario);
+                await _publicarMensagem.PublicarMensagem(FilasPersistencia.CriarUsuario, Exchange.ValorExchange, novoUsuario);
 
                 UsuarioDTO exibeUsuario = new (novoUsuario.Id, novoUsuario.Nome, novoUsuario.Email.ToLower(), novoUsuario.Role);
 
@@ -130,7 +128,8 @@ namespace Fiap.TechChallenge.Fase1.Aplicacao
 
                 usuario.AlterarUsuario(usuarioDTO.Nome, usuarioDTO.Email.ToLower(), hashSenha, usuarioDTO.Role);
 
-                await _usuarioRepository.AtualizarAsync(usuario);
+                //await _usuarioRepository.AtualizarAsync(usuario);
+                await _publicarMensagem.PublicarMensagem(FilasPersistencia.AtualizarUsuario, Exchange.ValorExchange, usuario);
 
                 UsuarioDTO exibeUsuario = new (usuario.Id, usuario.Nome, usuario.Email.ToLower(), usuario.Role);
 
@@ -156,7 +155,8 @@ namespace Fiap.TechChallenge.Fase1.Aplicacao
 
                 usuario.ExcluirUsuario();
 
-                await _usuarioRepository.RemoverAsync(usuario);
+                //await _usuarioRepository.RemoverAsync(usuario);
+                await _publicarMensagem.PublicarMensagem(FilasPersistencia.ExcluirUsuario, Exchange.ValorExchange, usuario);
 
                 UsuarioDTO exibeUsuario = new (usuario.Id, usuario.Nome, usuario.Email.ToLower(), usuario.Role);
 

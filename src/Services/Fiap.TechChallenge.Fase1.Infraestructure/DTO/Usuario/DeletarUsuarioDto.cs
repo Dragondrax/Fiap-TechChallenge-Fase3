@@ -1,6 +1,7 @@
-﻿namespace Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario;
-
-public class DeletarUsuarioDto
+﻿namespace Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario
 {
-    public Guid Id { get; set; }
+    public class DeletarUsuarioDto
+    {
+        public Guid Id { get; set; }
+    }
 }

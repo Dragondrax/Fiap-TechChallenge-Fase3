@@ -3,17 +3,20 @@ using Fiap.TechChallenge.Fase1.Dominio.Entidades;
 using Fiap.TechChallenge.Fase1.Dominio.Model;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Contato;
 using Fiap.TechChallenge.Fase1.SharedKernel;
+using Fiap.TechChallenge.Fase1.SharedKernel.Filas;
 using Fiap.TechChallenge.Fase1.SharedKernel.MensagensErro;
 using Fiap.TechChallenge.Fase1.SharedKernel.Model;
+using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 
 
 namespace Fiap.TechChallenge.Fase1.Aplicacao;
 
-public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoService regiaoService) : IContatoService
+public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoService regiaoService, IPublicaMensagemNaFila publicarMensagem) : IContatoService
 {
     private readonly IContatoRepository _contatoRepository = contatoRepository;
     private readonly IDDDRegiaoService _regiaoService = regiaoService;
     private List<string> _mensagem = [];
+    private readonly IPublicaMensagemNaFila _publicarMensagem = publicarMensagem;
 
     public async Task<ResponseModel> SalvarContato(CriarAlterarContatoDTO contatoDTO)
     {
@@ -31,7 +34,8 @@ public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoServ
         {
             var novoContato = new Contato(contatoDTO.Nome, contatoDTO.DDD, contatoDTO.Telefone, contatoDTO.Email);
 
-            await _contatoRepository.AdicionarAsync(novoContato);
+            //await _contatoRepository.AdicionarAsync(novoContato);
+            var resultado = await _publicarMensagem.PublicarMensagem(FilasPersistencia.CriarContato, Exchange.ValorExchange, novoContato);
 
             Dominio.Entidades.DDDRegiao regiao = await _regiaoService.BuscarDDDRegiao(novoContato.DDD);
             if (regiao is not null)
@@ -143,7 +147,8 @@ public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoServ
 
         contato.AlterarContato(contatoDTO.Nome, contatoDTO.DDD, contatoDTO.Telefone, contatoDTO.Email.ToLower());
 
-        await _contatoRepository.AtualizarAsync(contato);
+        //await _contatoRepository.AtualizarAsync(contato);
+        await _publicarMensagem.PublicarMensagem(FilasPersistencia.AtualizarContato, Exchange.ValorExchange, contato);
 
         Dominio.Entidades.DDDRegiao regiao = await _regiaoService.BuscarDDDRegiao(contato.DDD);
 
@@ -163,7 +168,8 @@ public class ContatoService(IContatoRepository contatoRepository, IDDDRegiaoServ
         {
             contato.ExcluirContato();
 
-            await _contatoRepository.RemoverAsync(contato);
+            //await _contatoRepository.RemoverAsync(contato);
+            await _publicarMensagem.PublicarMensagem(FilasPersistencia.ExcluirContato, Exchange.ValorExchange, contato);
 
             _mensagem.Add(MensagemErroGenerico.MENSAGEM_SUCESSO);
             return new ResponseModel(_mensagem, true, contato);
