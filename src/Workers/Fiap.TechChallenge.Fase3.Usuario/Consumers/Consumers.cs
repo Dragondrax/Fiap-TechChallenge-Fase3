@@ -94,4 +94,4 @@ public class Consumers(IUsuarioServices usuarioService) : IConsumers
                              consumer: consumer);
     }
 }
-}
+
