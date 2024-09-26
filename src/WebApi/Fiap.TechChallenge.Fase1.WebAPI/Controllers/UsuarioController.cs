@@ -1,7 +1,10 @@
 ﻿using Fiap.TechChallenge.Fase1.Aplicacao;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
+using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Contato;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario;
 using Fiap.TechChallenge.Fase1.SharedKernel;
+using Fiap.TechChallenge.Fase1.SharedKernel.Filas;
+using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,22 +16,22 @@ namespace Fiap.TechChallenge.Fase1.WebAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly IPublicaMensagemNaFila _publicarMensagem;
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(IUsuarioService usuarioService, IPublicaMensagemNaFila publicarMensagem)
         {
             _usuarioService = usuarioService;
+            _publicarMensagem = publicarMensagem;
         }
 
         [HttpPost("CriarUsuario")]
         public async Task<IActionResult> SalvarNovoUsuario(CriarAlterarUsuarioDTO usuario)
         {
-            var resultado = await _usuarioService.SalvarUsuario(usuario);
-            if (resultado.Sucesso == true)
+            var resultado = await _publicarMensagem.PublicarMensagem(FilasUsuarios.CriarUsuarioService, Exchange.ValorExchange, usuario);
+            if (resultado)
                 return Ok(resultado);
-            else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Any(x => String.IsNullOrEmpty(x)))
-                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
             else
-                return BadRequest(resultado);
+                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
         }
 
         [HttpPost("Autenticar")]
@@ -59,25 +62,26 @@ namespace Fiap.TechChallenge.Fase1.WebAPI.Controllers
         [HttpPut("AlterarUsuario")]
         public async Task<IActionResult> RemoverUsuario(CriarAlterarUsuarioDTO usuario)
         {
-            var resultado = await _usuarioService.AlterarUsuario(usuario);
-            if (resultado.Sucesso == true)
+            var resultado = await _publicarMensagem.PublicarMensagem(FilasUsuarios.AtualizarUsuarioService, Exchange.ValorExchange, usuario);
+            if (resultado)
                 return Ok(resultado);
-            else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Any(x => String.IsNullOrEmpty(x)))
-                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
             else
-                return BadRequest(resultado);
+                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
         }
 
         [HttpDelete("RemoverUsuario")]
         public async Task<IActionResult> RemoverUsuario(Guid id)
         {
-            var resultado = await _usuarioService.RemoverUsuario(id);
-            if (resultado.Sucesso == true)
+            var deletarUsuarioDto = new DeletarUsuarioDto()
+            {
+                Id = id
+            };
+
+            var resultado = await _publicarMensagem.PublicarMensagem(FilasUsuarios.DeletarUsuarioService, Exchange.ValorExchange, deletarUsuarioDto);
+            if (resultado)
                 return Ok(resultado);
-            else if (resultado.Sucesso == false && resultado.Objeto is null && resultado.Mensagem.Any(x => String.IsNullOrEmpty(x)))
-                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
             else
-                return BadRequest(resultado);
+                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
         }
     }
 }
