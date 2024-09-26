@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
 
-namespace Fiap.TechChallenge.Fase3.Usuario.Services
+namespace Fiap.TechChallenge.Fase3.Usuario.Services;
+
+public interface IUsuarioServices
 {
-    internal interface IUsuarioServices
-    {
-    }
+    Task<bool> AlterarUsuarioService(CriarAlterarUsuarioDTO usuarioDto);
+    Task<bool> CriarUsuarioService(CriarAlterarUsuarioDTO usuarioDto);
+    Task<bool> RemoverUsuarioService(Guid usuarioId);
 }

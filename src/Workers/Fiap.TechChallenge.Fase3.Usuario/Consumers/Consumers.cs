@@ -1,25 +1,18 @@
-﻿using Fiap.TechChallenge.Fase1.Aplicacao;
-using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
+﻿using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario;
 using Fiap.TechChallenge.Fase1.SharedKernel.Filas;
+using Fiap.TechChallenge.Fase3.Usuario.Services;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Fiap.TechChallenge.Fase3.Usuario.Consumers;
 
-public class Consumers : IConsumers
+public class Consumers(IUsuarioServices usuarioService) : IConsumers
 {
-    private readonly IUsuarioService _usuarioService;
-    public Consumers(IUsuarioService usuarioService)
-    {
-        _usuarioService = usuarioService;
-    }
+    private readonly IUsuarioServices _usuarioService = usuarioService;
+
     public void ConsumerAtualizarUsuario(IModel channel)
     {
         var consumer = new EventingBasicConsumer(channel);
@@ -34,7 +27,7 @@ public class Consumers : IConsumers
             };
             var dadosMensagem = JsonSerializer.Deserialize<CriarAlterarUsuarioDTO>(message, options);
 
-            var result = await _usuarioService.AlterarUsuario(dadosMensagem);
+            var result = await _usuarioService.AlterarUsuarioService(dadosMensagem);
 
             if (result)
                 channel.BasicAck(ea.DeliveryTag, false);
@@ -61,7 +54,7 @@ public class Consumers : IConsumers
             };
             var dadosMensagem = JsonSerializer.Deserialize<CriarAlterarUsuarioDTO>(message, options);
 
-            var result = await _usuarioService.SalvarUsuario(dadosMensagem);
+            var result = await _usuarioService.CriarUsuarioService(dadosMensagem);
 
             if (result)
                 channel.BasicAck(ea.DeliveryTag, false);
@@ -88,7 +81,7 @@ public class Consumers : IConsumers
             };
             var dadosMensagem = JsonSerializer.Deserialize<DeletarUsuarioDto>(message, options);
 
-            var result = await _usuarioService.RemoverUsuario(dadosMensagem.Id);
+            var result = await _usuarioService.RemoverUsuarioService(dadosMensagem.Id);
 
             if (result)
                 channel.BasicAck(ea.DeliveryTag, false);
