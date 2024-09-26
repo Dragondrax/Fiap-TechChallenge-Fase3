@@ -8,16 +8,18 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Services
     {
         private readonly IContatoRepository _contatoRepository = contatoRepository;
 
-        public async Task<bool> CadastrarContatoRepository(Contato contato)
+        public async Task<bool> CadastrarContatoRepository(CriarAlterarContatoDTO contato)
         {
             try
             {
-                var dadosContrato = await _contatoRepository.ObterPorEmailAsync(contato.Email.ToLower());
+                var dadosContato = await _contatoRepository.ObterPorEmailAsync(contato.Email.ToLower());
 
-                if (dadosContrato != null)
+                if (dadosContato != null)
                     return false;
 
-                await _contatoRepository.AdicionarAsync(contato);
+                var novoContato = new Contato(contato.Nome, contato.DDD, contato.Telefone, contato.Email);
+
+                await _contatoRepository.AdicionarAsync(novoContato);
 
                 return true;
             }
@@ -27,7 +29,7 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Services
             }
         }
 
-        public async Task<bool> AlterarContatoRepository(Contato contato)
+        public async Task<bool> AlterarContatoRepository(CriarAlterarContatoDTO contato)
         {
             try
             {
@@ -36,7 +38,9 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Services
                 if (dadosContrato == null)
                     return false;
 
-                await _contatoRepository.AtualizarAsync(contato);
+                dadosContrato.AlterarContato(contato.Nome, contato.DDD, contato.Telefone, contato.Email);
+
+                await _contatoRepository.AtualizarAsync(dadosContrato);
 
                 return true;
             }
@@ -54,6 +58,8 @@ namespace Fiap.TechChallenge.Fase3.Persistencia.Services
 
                 if (contato == null)
                     return false;
+
+                contato.ExcluirContato();
 
                 await _contatoRepository.RemoverAsync(contato);
 

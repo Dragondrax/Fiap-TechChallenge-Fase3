@@ -30,8 +30,11 @@ namespace Fiap.TechChallenge.Fase3.Deletar
 
             _gerenciamentoFila.CriarFilas(channel);
             _consumer.ConsumerCadastrarContato(channel);
-            //_consumer.ConsumerAtualizarContato(channel);
-            //_consumer.ConsumerDeletarContato(channel);
+            _consumer.ConsumerAtualizarContato(channel);
+            _consumer.ConsumerDeletarContato(channel);
+            _consumer.ConsumerCadastrarUsuario(channel);
+            _consumer.ConsumerAtualizarUsuario(channel);
+            _consumer.ConsumerDeletarUsuario(channel);
         }
     }
 }

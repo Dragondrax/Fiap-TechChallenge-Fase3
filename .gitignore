@@ -458,3 +458,9 @@ FodyWeavers.xsd
 *.editorconfig
 /src/Workers/Fiap.TechChallenge.Fase3.Usuario/obj/Fiap.TechChallenge.Fase3.Usuario.csproj.nuget.g.props
 *.targets
+/src/Tests/Fiap.TechChallenge.Fase1.Tests/bin/Release/net8.0
+/src/Workers/Fiap.TechChallenge.Fase3.Usuarios/obj
+/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
+/src/Workers/Fiap.TechChallenge.Fase3.Cadastrar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Usuario.GeneratedMSBuildEditorConfig.editorconfig
+/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Persistencia.GeneratedMSBuildEditorConfig.editorconfig
+/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Contato.GeneratedMSBuildEditorConfig.editorconfig
