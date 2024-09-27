@@ -1,13 +1,12 @@
-﻿using Fiap.TechChallenge.Fase1.Dominio.Entidades;
-using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
+﻿using Fiap.TechChallenge.Fase1.Infraestructure.DTO;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Contato;
+using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario;
 using Fiap.TechChallenge.Fase1.SharedKernel.Filas;
 using Fiap.TechChallenge.Fase3.Persistencia.Services;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Channels;
 
 namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
 {
