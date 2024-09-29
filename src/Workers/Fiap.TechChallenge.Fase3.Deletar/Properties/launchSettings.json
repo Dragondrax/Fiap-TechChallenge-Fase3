@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "Fiap.TechChallenge.Fase3.Deletar": {
+    "Fiap.TechChallenge.Fase3.Persistencia": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {

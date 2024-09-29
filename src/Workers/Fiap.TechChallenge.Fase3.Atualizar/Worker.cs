@@ -2,7 +2,7 @@ using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.Contato.Consumers;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 
-namespace Fiap.TechChallenge.Fase3.Atualizar
+namespace Fiap.TechChallenge.Fase3.Contato
 {
     public class Worker : BackgroundService
     {

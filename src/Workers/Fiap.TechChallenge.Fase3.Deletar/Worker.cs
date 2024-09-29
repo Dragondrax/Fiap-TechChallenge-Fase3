@@ -2,7 +2,7 @@ using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.Persistencia.Consumers;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 
-namespace Fiap.TechChallenge.Fase3.Deletar
+namespace Fiap.TechChallenge.Fase3.Persistencia
 {
     public class Worker : BackgroundService
     {

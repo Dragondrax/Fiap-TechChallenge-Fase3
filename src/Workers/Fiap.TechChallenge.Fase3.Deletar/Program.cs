@@ -1,6 +1,6 @@
 using Fiap.TechChallenge.Fase1.Data.Context;
 using Fiap.TechChallenge.Fase1.IoC;
-using Fiap.TechChallenge.Fase3.Deletar;
+using Fiap.TechChallenge.Fase3.Persistencia;
 using Fiap.TechChallenge.Fase3.Persistencia.Consumers;
 using Fiap.TechChallenge.Fase3.Persistencia.Services;
 using Microsoft.EntityFrameworkCore;

@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-Fiap.TechChallenge.Fase3.Deletar-d0165313-a683-46ac-82a6-1eceeccda44e</UserSecretsId>
+    <UserSecretsId>dotnet-Fiap.TechChallenge.Fase3.Persistencia-d0165313-a683-46ac-82a6-1eceeccda44e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

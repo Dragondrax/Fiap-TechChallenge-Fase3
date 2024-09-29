@@ -35,7 +35,7 @@ public class Consumers(IUsuarioServices usuarioService) : IConsumers
                 channel.BasicReject(ea.DeliveryTag, false);
         };
 
-        channel.BasicConsume(queue: FilasContatos.AtualizarContatoService,
+        channel.BasicConsume(queue: FilasUsuarios.AtualizarUsuarioService,
                              autoAck: false,
                              consumer: consumer);
     }
@@ -62,7 +62,7 @@ public class Consumers(IUsuarioServices usuarioService) : IConsumers
                 channel.BasicReject(ea.DeliveryTag, false);
         };
 
-        channel.BasicConsume(queue: FilasContatos.CriarContatoService,
+        channel.BasicConsume(queue: FilasUsuarios.CriarUsuarioService,
                              autoAck: false,
                              consumer: consumer);
     }
@@ -89,7 +89,7 @@ public class Consumers(IUsuarioServices usuarioService) : IConsumers
                 channel.BasicReject(ea.DeliveryTag, false);
         };
 
-        channel.BasicConsume(queue: FilasContatos.DeletarContatoService,
+        channel.BasicConsume(queue: FilasUsuarios.DeletarUsuarioService,
                              autoAck: false,
                              consumer: consumer);
     }

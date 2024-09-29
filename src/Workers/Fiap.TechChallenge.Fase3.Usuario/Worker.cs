@@ -1,11 +1,6 @@
 ﻿using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 using Fiap.TechChallenge.Fase3.Usuario.Consumers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fiap.TechChallenge.Fase3.Usuario;
 

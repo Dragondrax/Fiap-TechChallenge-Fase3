@@ -1,5 +1,4 @@
 ﻿using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Usuario;
-using Fiap.TechChallenge.Fase1.Integration.Tests.Infra;
 using Fiap.TechChallenge.Fase1.SharedKernel.Model;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +9,7 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests
     public class FiapTechChallengeWebApplicationFactory : WebApplicationFactory<Program>
     {
         private readonly FiapTechChallengeWebApplicationFactory _app;
-        private readonly IConfiguration _configuration;
+        public readonly IConfiguration _configuration;
         public readonly string _email;
         public readonly string _senha;
 

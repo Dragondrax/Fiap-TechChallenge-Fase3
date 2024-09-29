@@ -27,6 +27,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\WebApi\Fiap.TechChallenge.Fase1.WebAPI\Fiap.TechChallenge.Fase1.WebAPI.csproj" />
+    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Atualizar\Fiap.TechChallenge.Fase3.Contato.csproj" />
+    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Deletar\Fiap.TechChallenge.Fase3.Persistencia.csproj" />
+    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Usuario\Fiap.TechChallenge.Fase3.Usuario.csproj" />
   </ItemGroup>
 
   <ItemGroup>

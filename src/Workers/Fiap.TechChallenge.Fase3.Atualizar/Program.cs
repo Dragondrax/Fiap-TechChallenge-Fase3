@@ -1,6 +1,6 @@
 using Fiap.TechChallenge.Fase1.Data.Context;
 using Fiap.TechChallenge.Fase1.IoC;
-using Fiap.TechChallenge.Fase3.Atualizar;
+using Fiap.TechChallenge.Fase3.Contato;
 using Fiap.TechChallenge.Fase3.Contato.Consumers;
 using Fiap.TechChallenge.Fase3.Contato.Services;
 using Microsoft.EntityFrameworkCore;
