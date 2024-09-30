@@ -5,8 +5,10 @@ using Fiap.TechChallenge.Fase1.IoC;
 using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.Contato.Consumers;
 using Fiap.TechChallenge.Fase3.Contato.Services;
+using Fiap.TechChallenge.Fase3.Persistencia.Consumers;
 using Fiap.TechChallenge.Fase3.Persistencia.Services;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
+using Fiap.TechChallenge.Fase3.Usuario.Consumers;
 using Fiap.TechChallenge.Fase3.Usuario.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,9 +28,9 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
         private readonly DockerClient _dockerClient = new DockerClientConfiguration().CreateClient();
         private readonly IConfiguracoesRabbitMQ _configuracaoRabbit = new ConfiguracoesRabbitMQ();
         private readonly IGerenciamentoFilasRabbitMQ _gerenciamentoFila = new GerenciamentoFilasRabbitMQ();
-        public readonly IHost _hostContato;
-        public readonly IHost _hostUsuario;
-        public readonly IHost _hostPersistencia;
+        public IHost _hostContato;
+        public IHost _hostUsuario;
+        public IHost _hostPersistencia;
 
         public DockerFixture()
         {
@@ -126,73 +128,63 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
 
                 _dockerClient.Containers.StartContainerAsync(_containerId, new ContainerStartParameters()).GetAwaiter().GetResult();
 
-                //Testa a conexão e cria as filas
-                AguardarContainerRabbitMQEstarProntoParaConexao(_dockerClient).GetAwaiter().GetResult();
+                var rabbitMqProntoPara = AguardarContainerRabbitMQEstarProntoParaConexao(_dockerClient).GetAwaiter().GetResult();
 
+                if(rabbitMqProntoPara)
+                {
+                    var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                    Task.WaitAll(StartWorkersAsync());
+                }
             }
+        }
 
-            _hostPersistencia = Host.CreateDefaultBuilder()
+        public async Task StartWorkersAsync()
+        {
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
+            _hostPersistencia = await BuildHostAsync<Fiap.TechChallenge.Fase3.Persistencia.Worker>(configuration);
+            await _hostPersistencia.WaitForShutdownAsync();
+
+            _hostContato = await BuildHostAsync<Fiap.TechChallenge.Fase3.Contato.Worker>(configuration);
+            await _hostContato.WaitForShutdownAsync();
+
+            _hostUsuario = await BuildHostAsync<Fiap.TechChallenge.Fase3.Usuario.Worker>(configuration);
+            await _hostUsuario.WaitForShutdownAsync();
+        }
+
+        private async Task<IHost> BuildHostAsync<TWorker>(IConfiguration configuration) where TWorker : class, IHostedService
+        {
+            return Host.CreateDefaultBuilder()
                        .ConfigureServices((context, services) =>
                        {
-                           services.AddHostedService<Fiap.TechChallenge.Fase3.Persistencia.Worker>();
+                           services.AddHostedService<TWorker>();
 
                            InjecaoDependenciaWorkers.ResolverDependencia(services);
 
-                           services.AddSingleton<IPersistirContatoRepository, PersistirContatoRepository>();
-                           services.AddSingleton<IPersistirUsuarioRepository, PersistirUsuarioRepository>();
-                           services.AddSingleton<IConsumers, Consumers>();
+                           // Adiciona serviços específicos baseados no worker
+                           if (typeof(TWorker) == typeof(Fiap.TechChallenge.Fase3.Persistencia.Worker))
+                           {
+                               services.AddSingleton<IPersistirContatoRepository, PersistirContatoRepository>();
+                               services.AddSingleton<IPersistirUsuarioRepository, PersistirUsuarioRepository>();
+                               services.AddSingleton<IConsumerPersistencia, ConsumersPersistencia>();
+                           }
+                           else if (typeof(TWorker) == typeof(Fiap.TechChallenge.Fase3.Contato.Worker))
+                           {
+                               services.AddSingleton<IContatoServices, ContatoServices>();
+                               services.AddSingleton<IConsumersContato, ConsumersContato>();
+                           }
+                           else if (typeof(TWorker) == typeof(Fiap.TechChallenge.Fase3.Usuario.Worker))
+                           {
+                               services.AddSingleton<IUsuarioServices, UsuarioServices>();
+                               services.AddSingleton<IConsumersUsuario, ConsumersUsuario>();
+                           }
 
                            services.AddDbContext<ContextTechChallenge>(options =>
                            {
-                               var configuration = context.Configuration;
                                options.UseNpgsql(configuration.GetConnectionString("conexao"), x => x.MigrationsAssembly("Fiap.TechChallenge.Fase1.Data")).UseLowerCaseNamingConvention();
                            }, ServiceLifetime.Singleton);
                        })
                        .Build();
-
-            _hostPersistencia.StartAsync();
-
-
-            _hostContato = Host.CreateDefaultBuilder()
-                        .ConfigureServices((context, services) =>
-                        {
-                            services.AddHostedService<Fiap.TechChallenge.Fase3.Contato.Worker>();
-
-                            InjecaoDependenciaWorkers.ResolverDependencia(services);
-
-                            services.AddSingleton<IContatoServices, ContatoServices>();
-                            services.AddSingleton<IConsumers, Consumers>();
-
-                            services.AddDbContext<ContextTechChallenge>(options =>
-                            {
-                                var configuration = context.Configuration;
-                                options.UseNpgsql(configuration.GetConnectionString("conexao"), x => x.MigrationsAssembly("Fiap.TechChallenge.Fase1.Data")).UseLowerCaseNamingConvention();
-                            }, ServiceLifetime.Singleton);
-                        })
-                        .Build();
-
-            _hostContato.StartAsync();
-
-            _hostUsuario = Host.CreateDefaultBuilder()
-                        .ConfigureServices((context, services) =>
-                        {
-                            services.AddHostedService<Fiap.TechChallenge.Fase3.Usuario.Worker>();
-
-                            InjecaoDependenciaWorkers.ResolverDependencia(services);
-
-                            services.AddSingleton<IUsuarioServices, UsuarioServices>();
-                            services.AddSingleton<IConsumers, Consumers>();
-
-                            services.AddDbContext<ContextTechChallenge>(options =>
-                            {
-                                var configuration = context.Configuration;
-                                options.UseNpgsql(configuration.GetConnectionString("conexao"), x => x.MigrationsAssembly("Fiap.TechChallenge.Fase1.Data")).UseLowerCaseNamingConvention();
-                            }, ServiceLifetime.Singleton);
-                        })
-                        .Build();
-
-            _hostUsuario.StartAsync();
-
         }
 
         private async Task<bool> AguardarContainerRabbitMQEstarProntoParaConexao(DockerClient client)
@@ -257,9 +249,9 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
 
             if (existingContainer != null)
             {
-                _hostContato.StopAsync().Wait();
-                _hostUsuario.StopAsync().Wait();
-                _hostPersistencia.StopAsync().Wait();
+                _hostContato?.StopAsync()?.Wait();
+                _hostUsuario?.StopAsync()?.Wait();
+                _hostPersistencia?.StopAsync()?.Wait();
 
                 _containerId = existingContainer.ID;
                 if (existingContainer.State == "running")

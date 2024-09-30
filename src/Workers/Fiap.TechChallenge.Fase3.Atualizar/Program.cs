@@ -11,7 +11,7 @@ builder.Services.AddHostedService<Worker>();
 InjecaoDependenciaWorkers.ResolverDependencia(builder.Services);
 
 builder.Services.AddSingleton<IContatoServices, ContatoServices>();
-builder.Services.AddSingleton<IConsumers, Consumers>();
+builder.Services.AddSingleton<IConsumersContato, ConsumersContato>();
 
 builder.Services.AddDbContext<ContextTechChallenge>(options =>
 {

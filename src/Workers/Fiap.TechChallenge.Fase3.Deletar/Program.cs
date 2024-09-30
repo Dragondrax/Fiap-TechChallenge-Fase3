@@ -12,7 +12,7 @@ InjecaoDependenciaWorkers.ResolverDependencia(builder.Services);
 
 builder.Services.AddSingleton<IPersistirContatoRepository, PersistirContatoRepository>();
 builder.Services.AddSingleton<IPersistirUsuarioRepository, PersistirUsuarioRepository>();
-builder.Services.AddSingleton<IConsumer, Consumers>();
+builder.Services.AddSingleton<IConsumerPersistencia, ConsumersPersistencia>();
 
 builder.Services.AddDbContext<ContextTechChallenge>(options =>
 {
