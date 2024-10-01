@@ -1,17 +1,8 @@
-﻿using Fiap.TechChallenge.Fase1.Data.Context;
-using Fiap.TechChallenge.Fase1.Dominio.Model;
+﻿using Fiap.TechChallenge.Fase1.Dominio.Model;
 using Fiap.TechChallenge.Fase1.Infraestructure.DTO.Contato;
 using Fiap.TechChallenge.Fase1.Integration.Tests.Infra;
 using Fiap.TechChallenge.Fase1.Integration.Tests.Model;
-using Fiap.TechChallenge.Fase1.IoC;
-using Fiap.TechChallenge.Fase3.Contato;
-using Fiap.TechChallenge.Fase3.Contato.Consumers;
-using Fiap.TechChallenge.Fase3.Contato.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -151,7 +142,7 @@ public class ContatoIntegrationTest
         var resultadoAlterar = await client.PutAsJsonAsync("/api/Contato/AlterarContato", alterarContato);
         Assert.Equal(HttpStatusCode.OK, resultadoAlterar.StatusCode);
 
-        await Task.Delay(5000);
+        await Task.Delay(20000);
 
         var resultadoBuscaEmail = await client.PostAsJsonAsync("/api/Contato/BuscarContatoPorEmail", buscarContato);
         var model = await resultadoBuscaEmail.Content.ReadFromJsonAsync<ResponseModelTeste>();

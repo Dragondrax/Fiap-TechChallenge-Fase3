@@ -72,20 +72,46 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
         {
             // Arrange
             using var client = await _app.GetClientWithAccessTokenAsync();
+            var email = "emailtesteusuario2@gmail.com";
 
             CriarAlterarUsuarioDTO criarUsuarioDTO = new()
             {
-                Email = _emailUsuarioTeste,
+                Email = email,
                 Nome = "Nome Teste",
                 Role = (Roles)1,
                 Senha = "senha123456"
             };
 
+            BuscarUsuarioDTO buscarUsuario = new BuscarUsuarioDTO()
+            {
+                Email = email
+            };
+
             // Act
             var resultado = await client.PostAsJsonAsync("/api/Usuario/CriarUsuario", criarUsuarioDTO);
 
+            await Task.Delay(20000);
+
+            var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", buscarUsuario);
+            usuarioRetornado.EnsureSuccessStatusCode();
+
+            var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+
+            // Verificação da propriedade Objeto como string
+            var usuarioEncontradoJson = model.Objeto.GetRawText();
+
+            // Desserializar para UsuarioDTO com case-insensitive options
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+
             // Assert
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, usuarioRetornado.StatusCode);
+            Assert.Equal(criarUsuarioDTO.Email, usuarioEncontrado.Email);
         }
 
         [Fact]
@@ -133,6 +159,31 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+
+            await Task.Delay(20000);
+
+
+            usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
+            usuarioRetornado.EnsureSuccessStatusCode();
+
+            model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+
+            // Verificação da propriedade Objeto como string
+            usuarioEncontradoJson = model.Objeto.GetRawText();
+
+            // Deserializar para UsuarioDTO com case-insensitive options
+            options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+
+            // Assert se o usuário foi encontrado
+            Assert.NotNull(usuarioEncontrado);
+            Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
+            Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+            Assert.Equal(alterarUsuarioDTO.Nome, usuarioEncontrado.Nome);
         }
 
         [Fact]
@@ -171,6 +222,32 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+
+            await Task.Delay(20000);
+
+
+            // Buscar usuário
+            usuario = new BuscarUsuarioDTO
+            {
+                Email = _emailUsuarioTeste
+            };
+
+            usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);          
+            model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+
+            // Verificação da propriedade Objeto como string
+            usuarioEncontradoJson = model.Objeto.GetRawText();
+
+            // Deserializar para UsuarioDTO com case-insensitive options
+            options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+
+            // Assert se o usuário não foi encontrado
+            Assert.Null(usuarioEncontrado);
         }
     }
 }
