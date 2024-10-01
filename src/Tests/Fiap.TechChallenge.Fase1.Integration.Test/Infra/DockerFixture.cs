@@ -283,25 +283,19 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
 
             if (existingContainerPostgres != null)
             {
-                _hostContato?.StopAsync()?.Wait();
-                _hostUsuario?.StopAsync()?.Wait();
-                _hostPersistencia?.StopAsync()?.Wait();
-
                 _containerIdPostgres = existingContainerPostgres?.ID;
-                _containerIdRabbit = existingContainerRabbitMq?.ID;
                 if (existingContainerPostgres?.State == "running" || existingContainerRabbitMq?.State == "running")
                 {
-                    try
-                    {
-                        _dockerClient.Containers.StopContainerAsync(_containerIdPostgres, new ContainerStopParameters()).GetAwaiter().GetResult();
-                        _dockerClient.Containers.RemoveContainerAsync(_containerIdPostgres, new ContainerRemoveParameters()).GetAwaiter().GetResult();
-                        _dockerClient.Containers.StopContainerAsync(_containerIdRabbit, new ContainerStopParameters()).GetAwaiter().GetResult();
-                        _dockerClient.Containers.RemoveContainerAsync(_containerIdRabbit, new ContainerRemoveParameters()).GetAwaiter().GetResult();
-                        _dockerClient.Dispose();
-                    }
-                    catch { }
+                    _dockerClient.Containers.StopContainerAsync(_containerIdPostgres, new ContainerStopParameters()).GetAwaiter().GetResult();
+                    _dockerClient.Containers.RemoveContainerAsync(_containerIdPostgres, new ContainerRemoveParameters()).GetAwaiter().GetResult();
                 }
-            }            
+            }
+
+            _hostContato?.StopAsync()?.Wait();
+            _hostUsuario?.StopAsync()?.Wait();
+            _hostPersistencia?.StopAsync()?.Wait();
+
+            _dockerClient?.Dispose();
         }
     }
 }

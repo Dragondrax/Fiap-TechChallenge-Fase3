@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-Fiap.TechChallenge.Fase3.Persistencia-d0165313-a683-46ac-82a6-1eceeccda44e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\WebApi\Fiap.TechChallenge.Fase1.WebAPI</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
