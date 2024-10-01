@@ -21,6 +21,9 @@ jobs:
         
     - name: Setup Docker para PostgresSQL
       run: docker pull postgres
+
+    - name: Setup Docker para RabbitMQ
+      run: docker pull rabbitmq:3-management
       
     - name: Restore dependencias do Projeto 
       run: dotnet restore src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln
