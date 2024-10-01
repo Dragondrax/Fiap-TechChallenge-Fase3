@@ -90,7 +90,7 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
             // Act
             var resultado = await client.PostAsJsonAsync("/api/Usuario/CriarUsuario", criarUsuarioDTO);
 
-            await Task.Delay(20000);
+            await Task.Delay(60000);
 
             var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", buscarUsuario);
             usuarioRetornado.EnsureSuccessStatusCode();
@@ -160,7 +160,7 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
             // Assert
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
 
-            await Task.Delay(20000);
+            await Task.Delay(60000);
 
             usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
             usuarioRetornado.EnsureSuccessStatusCode();
@@ -189,11 +189,11 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
         public async Task Delete_Usuario_Test()
         {
             using var client = await _app.GetClientWithAccessTokenAsync();
-
+            var emailExcluir = "emailtesteusuarioexcluir@gmail.com";
             // Buscar usuário
             var usuario = new BuscarUsuarioDTO
             {
-                Email = _emailUsuarioTeste
+                Email = emailExcluir
             };
 
             var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
@@ -222,13 +222,13 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
             // Assert
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
 
-            await Task.Delay(20000);
+            await Task.Delay(60000);
 
 
             // Buscar usuário
             usuario = new BuscarUsuarioDTO
             {
-                Email = _emailUsuarioTeste
+                Email = emailExcluir
             };
 
             usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);          

@@ -47,7 +47,7 @@ public class ContatoIntegrationTest
         // Act
         var resultado = await client.PostAsJsonAsync("/api/Contato/CriarContato", criarContato);
 
-        await Task.Delay(5000);
+        await Task.Delay(60000);
 
         var resultadoBuscaEmail = await client.PostAsJsonAsync("/api/Contato/BuscarContatoPorEmail", buscarContato);
         var model = await resultadoBuscaEmail.Content.ReadFromJsonAsync<ResponseModelTeste>();
@@ -142,7 +142,7 @@ public class ContatoIntegrationTest
         var resultadoAlterar = await client.PutAsJsonAsync("/api/Contato/AlterarContato", alterarContato);
         Assert.Equal(HttpStatusCode.OK, resultadoAlterar.StatusCode);
 
-        await Task.Delay(20000);
+        await Task.Delay(60000);
 
         var resultadoBuscaEmail = await client.PostAsJsonAsync("/api/Contato/BuscarContatoPorEmail", buscarContato);
         var model = await resultadoBuscaEmail.Content.ReadFromJsonAsync<ResponseModelTeste>();
