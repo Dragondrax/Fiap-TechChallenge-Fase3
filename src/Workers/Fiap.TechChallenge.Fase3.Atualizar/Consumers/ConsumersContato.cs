@@ -8,10 +8,10 @@ using System.Text.Json;
 
 namespace Fiap.TechChallenge.Fase3.Contato.Consumers
 {
-    public class Consumers : IConsumers
+    public class ConsumersContato : IConsumersContato
     {
         private readonly IContatoServices _contatoService;
-        public Consumers(IContatoServices contatoService)
+        public ConsumersContato(IContatoServices contatoService)
         {
             _contatoService = contatoService;
         }

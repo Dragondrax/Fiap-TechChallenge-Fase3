@@ -26,6 +26,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Context
             modelBuilder.ApplyConfiguration(new UsuarioMapping());
             modelBuilder.AdicionarRegioes();
             modelBuilder.AdicionarUsuarioPadraoAdministrador();
+            modelBuilder.AdicionarContatoTeste();
         }
 
         public async Task<bool> CommitAsync()

@@ -1,11 +1,6 @@
 ﻿using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 using Fiap.TechChallenge.Fase3.Usuario.Consumers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fiap.TechChallenge.Fase3.Usuario;
 
@@ -14,12 +9,12 @@ public class Worker : BackgroundService
     private readonly ILogger<Worker> _logger;
     private readonly IConfiguracoesRabbitMQ _configuracoesRabbit;
     private readonly IGerenciamentoFilasRabbitMQ _gerenciamentoFila;
-    private readonly IConsumers _consumer;
+    private readonly IConsumersUsuario _consumer;
 
     public Worker(ILogger<Worker> logger,
                   IConfiguracoesRabbitMQ configuracoesRabbit,
                   IGerenciamentoFilasRabbitMQ gerenciamentoFila,
-                  IConsumers consumer)
+                  IConsumersUsuario consumer)
     {
         _logger = logger;
         _configuracoesRabbit = configuracoesRabbit;

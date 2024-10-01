@@ -2,7 +2,7 @@
 
 namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
 {
-    public interface IConsumer
+    public interface IConsumerPersistencia
     {
         public void ConsumerCadastrarUsuario(IModel channel);
         public void ConsumerCadastrarContato(IModel channel);

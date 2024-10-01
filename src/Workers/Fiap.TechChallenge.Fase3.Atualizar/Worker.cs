@@ -2,19 +2,19 @@ using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.Contato.Consumers;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 
-namespace Fiap.TechChallenge.Fase3.Atualizar
+namespace Fiap.TechChallenge.Fase3.Contato
 {
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguracoesRabbitMQ _configuracoesRabbit;
         private readonly IGerenciamentoFilasRabbitMQ _gerenciamentoFila;
-        private readonly IConsumers _consumer;
+        private readonly IConsumersContato _consumer;
 
         public Worker(ILogger<Worker> logger,
                       IConfiguracoesRabbitMQ configuracoesRabbit,
                       IGerenciamentoFilasRabbitMQ gerenciamentoFila,
-                      IConsumers consumer)
+                      IConsumersContato consumer)
         {
             _logger = logger;
             _configuracoesRabbit = configuracoesRabbit;

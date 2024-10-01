@@ -10,11 +10,11 @@ using System.Text.Json;
 
 namespace Fiap.TechChallenge.Fase3.Persistencia.Consumers
 {
-    public class Consumers : IConsumer
+    public class ConsumersPersistencia : IConsumerPersistencia
     {
         private readonly IPersistirContatoRepository _persistirContatoRepository;
         private readonly IPersistirUsuarioRepository _persistirUsuarioRepository;
-        public Consumers(IPersistirContatoRepository persistirContatoRepository, IPersistirUsuarioRepository persistirUsuarioRepository)
+        public ConsumersPersistencia(IPersistirContatoRepository persistirContatoRepository, IPersistirUsuarioRepository persistirUsuarioRepository)
         {
             _persistirContatoRepository = persistirContatoRepository;
             _persistirUsuarioRepository = persistirUsuarioRepository;

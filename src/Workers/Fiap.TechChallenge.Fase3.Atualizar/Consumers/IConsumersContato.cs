@@ -2,7 +2,7 @@
 
 namespace Fiap.TechChallenge.Fase3.Contato.Consumers
 {
-    public interface IConsumers
+    public interface IConsumersContato
     {
         public void ConsumerCriarContato(IModel channel);
         public void ConsumerAtualizarContato(IModel channel);

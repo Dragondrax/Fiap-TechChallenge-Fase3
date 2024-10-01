@@ -2,19 +2,19 @@ using Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ;
 using Fiap.TechChallenge.Fase3.Persistencia.Consumers;
 using Fiap.TechChallenge.Fase3.RabbitMQ.GerenciamentoFilas;
 
-namespace Fiap.TechChallenge.Fase3.Deletar
+namespace Fiap.TechChallenge.Fase3.Persistencia
 {
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguracoesRabbitMQ _configuracoesRabbit;
         private readonly IGerenciamentoFilasRabbitMQ _gerenciamentoFila;
-        private readonly IConsumer _consumer;
+        private readonly IConsumerPersistencia _consumer;
 
         public Worker(ILogger<Worker> logger,
                       IConfiguracoesRabbitMQ configuracoesRabbit,
                       IGerenciamentoFilasRabbitMQ gerenciamentoFila,
-                      IConsumer consumer)
+                      IConsumerPersistencia consumer)
         {
             _logger = logger;
             _configuracoesRabbit = configuracoesRabbit;

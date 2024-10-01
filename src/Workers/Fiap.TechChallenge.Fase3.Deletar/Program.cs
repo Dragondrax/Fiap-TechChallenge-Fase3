@@ -1,6 +1,6 @@
 using Fiap.TechChallenge.Fase1.Data.Context;
 using Fiap.TechChallenge.Fase1.IoC;
-using Fiap.TechChallenge.Fase3.Deletar;
+using Fiap.TechChallenge.Fase3.Persistencia;
 using Fiap.TechChallenge.Fase3.Persistencia.Consumers;
 using Fiap.TechChallenge.Fase3.Persistencia.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ InjecaoDependenciaWorkers.ResolverDependencia(builder.Services);
 
 builder.Services.AddSingleton<IPersistirContatoRepository, PersistirContatoRepository>();
 builder.Services.AddSingleton<IPersistirUsuarioRepository, PersistirUsuarioRepository>();
-builder.Services.AddSingleton<IConsumer, Consumers>();
+builder.Services.AddSingleton<IConsumerPersistencia, ConsumersPersistencia>();
 
 builder.Services.AddDbContext<ContextTechChallenge>(options =>
 {
