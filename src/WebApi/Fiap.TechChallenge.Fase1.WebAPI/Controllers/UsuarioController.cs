@@ -60,13 +60,21 @@ namespace Fiap.TechChallenge.Fase1.WebAPI.Controllers
         }
 
         [HttpPut("AlterarUsuario")]
-        public async Task<IActionResult> RemoverUsuario(CriarAlterarUsuarioDTO usuario)
+        public async Task<IActionResult> AlterarUsuario(CriarAlterarUsuarioDTO usuario)
         {
-            var resultado = await _publicarMensagem.PublicarMensagem(FilasUsuarios.AtualizarUsuarioService, Exchange.ValorExchange, usuario);
-            if (resultado)
-                return Ok(resultado);
-            else
-                return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
+            try
+            {
+                var resultado = await _publicarMensagem.PublicarMensagem(FilasUsuarios.AtualizarUsuarioService, Exchange.ValorExchange, usuario);
+                if (resultado)
+                    return Ok(resultado);
+                else
+                    return StatusCode(500, MensagemErroGenerico.MENSAGEM_ERRO_500);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }   
+
         }
 
         [HttpDelete("RemoverUsuario")]

@@ -41,25 +41,12 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
             var existingContainerRabbitMq = _dockerClient.Containers.ListContainersAsync(new ContainersListParameters { All = true }).GetAwaiter().GetResult()
                                                             .FirstOrDefault(c => c.Names.Contains($"/{containerNameRabbitMQ}"));
 
-            if (existingContainerPostgres != null && existingContainerRabbitMq != null)
+            if (existingContainerPostgres != null)
             {
                 _containerIdPostgres = existingContainerPostgres.ID;
                 if (existingContainerPostgres.State != "running")
                 {
-                    _dockerClient.Containers.StartContainerAsync(_containerIdPostgres, new ContainerStartParameters()).GetAwaiter().GetResult();
-                }
-
-                _containerIdPostgres = existingContainerRabbitMq.ID;
-
-                if (existingContainerRabbitMq != null)
-                {
-                    var rabbitMqProntoPara = AguardarContainerRabbitMQEstarProntoParaConexao(_dockerClient).GetAwaiter().GetResult();
-
-                    if (rabbitMqProntoPara)
-                    {
-                        var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                        Task.WaitAll(StartWorkersAsync());
-                    }
+                    _dockerClient.Containers.StartContainerAsync(_containerIdRabbit, new ContainerStartParameters()).GetAwaiter().GetResult();
                 }
             }
             else
@@ -116,6 +103,33 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
                     else
                         throw new Exception("Nao foi possivel gerar uma conexao com o postgres");
                 }
+            }
+
+            if (existingContainerRabbitMq != null)
+            {
+                var rabbitMqProntoPara = AguardarContainerRabbitMQEstarProntoParaConexao(_dockerClient).GetAwaiter().GetResult();
+
+                if (rabbitMqProntoPara)
+                {
+                    var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                    Task.WaitAll(StartWorkersAsync());
+                }
+            }
+            else
+            {
+                var networks = _dockerClient.Networks.ListNetworksAsync(new NetworksListParameters());
+                var existeNetwork = networks.Result.Any(n => n.Name == networkName);
+
+                if (!existeNetwork)
+                {
+                    var networkCreateResponse = _dockerClient.Networks.CreateNetworkAsync(new NetworksCreateParameters
+                    {
+                        Name = networkName,
+                        Driver = "bridge"
+                    }).GetAwaiter().GetResult();
+
+                    var networkId = networkCreateResponse.ID;
+                }
 
                 //RabbitMQ
                 var createContainerResponseRabbitMq = _dockerClient.Containers.CreateContainerAsync(new CreateContainerParameters
@@ -147,7 +161,7 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
 
                 var rabbitMqProntoPara = AguardarContainerRabbitMQEstarProntoParaConexao(_dockerClient).GetAwaiter().GetResult();
 
-                if(rabbitMqProntoPara)
+                if (rabbitMqProntoPara)
                 {
                     var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
                     Task.WaitAll(StartWorkersAsync());
@@ -273,17 +287,19 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests.Infra
                 _hostUsuario?.StopAsync()?.Wait();
                 _hostPersistencia?.StopAsync()?.Wait();
 
-                _containerIdPostgres = existingContainerPostgres.ID;
-                _containerIdRabbit = existingContainerRabbitMq.ID;
-                if (existingContainerPostgres.State == "running" || existingContainerRabbitMq.State == "running")
+                _containerIdPostgres = existingContainerPostgres?.ID;
+                _containerIdRabbit = existingContainerRabbitMq?.ID;
+                if (existingContainerPostgres?.State == "running" || existingContainerRabbitMq?.State == "running")
                 {
-                    Task.Delay(20000);
-
-                    _dockerClient.Containers.StopContainerAsync(_containerIdPostgres, new ContainerStopParameters()).GetAwaiter().GetResult();
-                    _dockerClient.Containers.RemoveContainerAsync(_containerIdPostgres, new ContainerRemoveParameters()).GetAwaiter().GetResult();
-                    _dockerClient.Containers.StopContainerAsync(_containerIdRabbit, new ContainerStopParameters()).GetAwaiter().GetResult();
-                    _dockerClient.Containers.RemoveContainerAsync(_containerIdRabbit, new ContainerRemoveParameters()).GetAwaiter().GetResult();
-                    _dockerClient.Dispose();
+                    try
+                    {
+                        _dockerClient.Containers.StopContainerAsync(_containerIdPostgres, new ContainerStopParameters()).GetAwaiter().GetResult();
+                        _dockerClient.Containers.RemoveContainerAsync(_containerIdPostgres, new ContainerRemoveParameters()).GetAwaiter().GetResult();
+                        _dockerClient.Containers.StopContainerAsync(_containerIdRabbit, new ContainerStopParameters()).GetAwaiter().GetResult();
+                        _dockerClient.Containers.RemoveContainerAsync(_containerIdRabbit, new ContainerRemoveParameters()).GetAwaiter().GetResult();
+                        _dockerClient.Dispose();
+                    }
+                    catch { }
                 }
             }            
         }

@@ -148,7 +148,7 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
 
             CriarAlterarUsuarioDTO alterarUsuarioDTO = new()
             {
-                Email = _emailUsuarioTeste,
+                Email = usuarioEncontrado.Email,
                 Nome = "Nome Teste Alterado",
                 Role = (Roles)1,
                 Senha = "senha12345678"
@@ -161,7 +161,6 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
 
             await Task.Delay(20000);
-
 
             usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
             usuarioRetornado.EnsureSuccessStatusCode();
