@@ -185,68 +185,68 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
             Assert.Equal(alterarUsuarioDTO.Nome, usuarioEncontrado.Nome);
         }
 
-        //[Fact]
-        //public async Task Delete_Usuario_Test()
-        //{
-        //    using var client = await _app.GetClientWithAccessTokenAsync();
-        //    var emailExcluir = "emailtesteusuarioexcluir@gmail.com";
-        //    // Buscar usuário
-        //    var usuario = new BuscarUsuarioDTO
-        //    {
-        //        Email = emailExcluir
-        //    };
+        [Fact]
+        public async Task Delete_Usuario_Test()
+        {
+            using var client = await _app.GetClientWithAccessTokenAsync();
+            var emailExcluir = "emailtesteusuarioexcluir@gmail.com";
+            // Buscar usuário
+            var usuario = new BuscarUsuarioDTO
+            {
+                Email = emailExcluir
+            };
 
-        //    var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
-        //    usuarioRetornado.EnsureSuccessStatusCode();
+            var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
+            usuarioRetornado.EnsureSuccessStatusCode();
 
-        //    var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+            var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
 
-        //    // Verificação da propriedade Objeto como string
-        //    var usuarioEncontradoJson = model.Objeto.GetRawText();
+            // Verificação da propriedade Objeto como string
+            var usuarioEncontradoJson = model.Objeto.GetRawText();
 
-        //    // Desserializar para UsuarioDTO com case-insensitive options
-        //    var options = new JsonSerializerOptions
-        //    {
-        //        PropertyNameCaseInsensitive = true
-        //    };
+            // Desserializar para UsuarioDTO com case-insensitive options
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-        //    var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+            var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
 
-        //    // Assert se o usuário foi encontrado
-        //    Assert.NotNull(usuarioEncontrado);
-        //    Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
+            // Assert se o usuário foi encontrado
+            Assert.NotNull(usuarioEncontrado);
+            Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
 
-        //    // Excluir usuário
-        //    var resultado = await client.DeleteAsync($"/api/Usuario/RemoverUsuario?id={usuarioEncontrado.Id}");
+            // Excluir usuário
+            var resultado = await client.DeleteAsync($"/api/Usuario/RemoverUsuario?id={usuarioEncontrado.Id}");
 
-        //    // Assert
-        //    Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
 
-        //    await Task.Delay(60000);
+            await Task.Delay(60000);
 
 
-        //    // Buscar usuário
-        //    usuario = new BuscarUsuarioDTO
-        //    {
-        //        Email = emailExcluir
-        //    };
+            // Buscar usuário
+            usuario = new BuscarUsuarioDTO
+            {
+                Email = emailExcluir
+            };
 
-        //    usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);          
-        //    model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+            usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
+            model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
 
-        //    // Verificação da propriedade Objeto como string
-        //    usuarioEncontradoJson = model.Objeto.GetRawText();
+            // Verificação da propriedade Objeto como string
+            usuarioEncontradoJson = model.Objeto.GetRawText();
 
-        //    // Deserializar para UsuarioDTO com case-insensitive options
-        //    options = new JsonSerializerOptions
-        //    {
-        //        PropertyNameCaseInsensitive = true
-        //    };
+            // Deserializar para UsuarioDTO com case-insensitive options
+            options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-        //    usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+            usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
 
-        //    // Assert se o usuário não foi encontrado
-        //    Assert.Null(usuarioEncontrado);
-        //}
+            // Assert se o usuário não foi encontrado
+            Assert.Null(usuarioEncontrado);
+        }
     }
 }
