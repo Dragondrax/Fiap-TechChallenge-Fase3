@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -21,69 +22,56 @@ namespace Fiap.TechChallenge.Fase1.Integration.Tests;
 public class ContatoIntegrationTest
 {
     private readonly FiapTechChallengeWebApplicationFactory _app;
-    private DockerFixture _dockerFixture;
+    private DockerFixture _dockerFixture; 
     private const string _emailContatoTeste = "emailtestecontato@gmail.com";
-
+    private const string _emailContatoTesteExcluir = "emailtestecontatoexcluir@gmail.com";
     private readonly IHost _host;
 
     public ContatoIntegrationTest()
     {
         _app = new FiapTechChallengeWebApplicationFactory();
         _dockerFixture = new DockerFixture();
-
-        //_host = Host.CreateDefaultBuilder()
-        //        .ConfigureServices((context, services) =>
-        //        {
-        //            services.AddHostedService<Fiap.TechChallenge.Fase3.Atualizar.Worker>();
-
-        //            InjecaoDependenciaWorkers.ResolverDependencia(services);
-
-        //            services.AddSingleton<IContatoServices, ContatoServices>();
-        //            services.AddSingleton<IConsumers, Consumers>();
-
-        //            services.AddDbContext<ContextTechChallenge>(options =>
-        //            {
-        //                var configuration = context.Configuration;
-        //                options.UseNpgsql(configuration.GetConnectionString("conexao"), x => x.MigrationsAssembly("Fiap.TechChallenge.Fase1.Data")).UseLowerCaseNamingConvention();
-        //            }, ServiceLifetime.Singleton);
-        //        })
-        //        .Build();
     }
 
-
-    //[Fact]
-    //public async void Worker_Should_Process_Message_Correctly()
-    //{
-    //    //Arrange
-
-    //    //Act
-    //    await _host.StartAsync();
-
-    //    await Task.Delay(60000);
-
-    //    //Assert
-    //}
-
-
     [Fact]
-    public async void Post_Criar_Novo_Usuario()
+    public async void Post_Criar_Novo_Contato()
     {
         // Arrange
         using var client = await _app.GetClientWithAccessTokenAsync();
+        var email = "emailtestecontato2@gmail.com";
 
         CriarAlterarContatoDTO criarContato = new()
         {
-            Email = "emailtestecontato2@gmail.com",
+            Email = email,
             Nome = "Nome Teste",
             Telefone = "994918888",
             DDD = 11,
         };
 
+        BuscarContatoDTO buscarContato = new BuscarContatoDTO()
+        {
+            Email = email
+        };
+
         // Act
         var resultado = await client.PostAsJsonAsync("/api/Contato/CriarContato", criarContato);
 
+        await Task.Delay(5000);
+
+        var resultadoBuscaEmail = await client.PostAsJsonAsync("/api/Contato/BuscarContatoPorEmail", buscarContato);
+        var model = await resultadoBuscaEmail.Content.ReadFromJsonAsync<ResponseModelTeste>();
+        var contatoEncontradoJson = model.Objeto.GetRawText();
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        var contatoEncontrado = JsonSerializer.Deserialize<ResponseBuscarContato>(contatoEncontradoJson, options);
+
         // Assert
         Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+        Assert.Equal(criarContato.Email, contatoEncontrado.Contato.Email);
     }
 
     [Fact]
@@ -163,9 +151,17 @@ public class ContatoIntegrationTest
         var resultadoAlterar = await client.PutAsJsonAsync("/api/Contato/AlterarContato", alterarContato);
         Assert.Equal(HttpStatusCode.OK, resultadoAlterar.StatusCode);
 
+        await Task.Delay(5000);
+
+        var resultadoBuscaEmail = await client.PostAsJsonAsync("/api/Contato/BuscarContatoPorEmail", buscarContato);
+        var model = await resultadoBuscaEmail.Content.ReadFromJsonAsync<ResponseModelTeste>();
+        var contatoEncontradoJson = model.Objeto.GetRawText();
+
+        var contatoEncontrado = JsonSerializer.Deserialize<ResponseBuscarContato>(contatoEncontradoJson, options);
+
         // Assert
         Assert.Equal(HttpStatusCode.OK, resultadoAlterar.StatusCode);
-        //Assert.Equal(alterarContato.Nome, contatoAlterado.Contato.Nome);
+        Assert.Equal(alterarContato.Nome, contatoEncontrado.Contato.Nome);
     }
 
     [Fact]
@@ -176,7 +172,7 @@ public class ContatoIntegrationTest
 
         BuscarContatoDTO buscarContato = new()
         {
-            Email = _emailContatoTeste
+            Email = _emailContatoTesteExcluir
         };
 
         var resultadoBuscar = await client.PostAsJsonAsync("/api/Contato/BuscarContatoPorEmail", buscarContato);

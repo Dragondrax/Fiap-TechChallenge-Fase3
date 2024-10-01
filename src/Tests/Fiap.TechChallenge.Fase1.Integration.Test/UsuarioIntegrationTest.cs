@@ -88,89 +88,89 @@ namespace Fiap.TechChallenge.Fase1.Integration.Test
             Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
         }
 
-        //[Fact]
-        //public async void Put_Alterar_Usuario()
-        //{
-        //    // Arrange
-        //    using var client = await _app.GetClientWithAccessTokenAsync();
+        [Fact]
+        public async void Put_Alterar_Usuario()
+        {
+            // Arrange
+            using var client = await _app.GetClientWithAccessTokenAsync();
 
-        //    // Buscar usuário
-        //    var usuario = new BuscarUsuarioDTO
-        //    {
-        //        Email = _emailUsuarioTeste
-        //    };
+            // Buscar usuário
+            var usuario = new BuscarUsuarioDTO
+            {
+                Email = _emailUsuarioTeste
+            };
 
-        //    var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
-        //    usuarioRetornado.EnsureSuccessStatusCode();
+            var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
+            usuarioRetornado.EnsureSuccessStatusCode();
 
-        //    var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+            var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
 
-        //    // Verificação da propriedade Objeto como string
-        //    var usuarioEncontradoJson = model.Objeto.GetRawText();
+            // Verificação da propriedade Objeto como string
+            var usuarioEncontradoJson = model.Objeto.GetRawText();
 
-        //    // Deserializar para UsuarioDTO com case-insensitive options
-        //    var options = new JsonSerializerOptions
-        //    {
-        //        PropertyNameCaseInsensitive = true
-        //    };
+            // Deserializar para UsuarioDTO com case-insensitive options
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-        //    var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+            var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
 
-        //    // Assert se o usuário foi encontrado
-        //    Assert.NotNull(usuarioEncontrado);
-        //    Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
+            // Assert se o usuário foi encontrado
+            Assert.NotNull(usuarioEncontrado);
+            Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
 
-        //    CriarAlterarUsuarioDTO alterarUsuarioDTO = new()
-        //    {
-        //        Email = _emailUsuarioTeste,
-        //        Nome = "Nome Teste Alterado",
-        //        Role = (Roles)1,
-        //        Senha = "senha12345678"
-        //    };
+            CriarAlterarUsuarioDTO alterarUsuarioDTO = new()
+            {
+                Email = _emailUsuarioTeste,
+                Nome = "Nome Teste Alterado",
+                Role = (Roles)1,
+                Senha = "senha12345678"
+            };
 
-        //    // Act
-        //    var resultado = await client.PutAsJsonAsync("/api/Usuario/AlterarUsuario", alterarUsuarioDTO);
+            // Act
+            var resultado = await client.PutAsJsonAsync("/api/Usuario/AlterarUsuario", alterarUsuarioDTO);
 
-        //    // Assert
-        //    Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
-        //}
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+        }
 
-        //[Fact]
-        //public async Task Delete_Usuario_Test()
-        //{
-        //    using var client = await _app.GetClientWithAccessTokenAsync();
+        [Fact]
+        public async Task Delete_Usuario_Test()
+        {
+            using var client = await _app.GetClientWithAccessTokenAsync();
 
-        //    // Buscar usuário
-        //    var usuario = new BuscarUsuarioDTO
-        //    {
-        //        Email = _emailUsuarioTeste
-        //    };
+            // Buscar usuário
+            var usuario = new BuscarUsuarioDTO
+            {
+                Email = _emailUsuarioTeste
+            };
 
-        //    var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
-        //    usuarioRetornado.EnsureSuccessStatusCode();
+            var usuarioRetornado = await client.PostAsJsonAsync("/api/Usuario/BuscarUsuario", usuario);
+            usuarioRetornado.EnsureSuccessStatusCode();
 
-        //    var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
+            var model = await usuarioRetornado.Content.ReadFromJsonAsync<ResponseModelTeste>();
 
-        //    // Verificação da propriedade Objeto como string
-        //    var usuarioEncontradoJson = model.Objeto.GetRawText();
+            // Verificação da propriedade Objeto como string
+            var usuarioEncontradoJson = model.Objeto.GetRawText();
 
-        //    // Desserializar para UsuarioDTO com case-insensitive options
-        //    var options = new JsonSerializerOptions
-        //    {
-        //        PropertyNameCaseInsensitive = true
-        //    };
+            // Desserializar para UsuarioDTO com case-insensitive options
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-        //    var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
+            var usuarioEncontrado = JsonSerializer.Deserialize<UsuarioDTO>(usuarioEncontradoJson, options);
 
-        //    // Assert se o usuário foi encontrado
-        //    Assert.NotNull(usuarioEncontrado);
-        //    Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
+            // Assert se o usuário foi encontrado
+            Assert.NotNull(usuarioEncontrado);
+            Assert.NotEqual(Guid.Empty, usuarioEncontrado.Id);
 
-        //    // Excluir usuário
-        //    var resultado = await client.DeleteAsync($"/api/Usuario/RemoverUsuario?id={usuarioEncontrado.Id}");
+            // Excluir usuário
+            var resultado = await client.DeleteAsync($"/api/Usuario/RemoverUsuario?id={usuarioEncontrado.Id}");
 
-        //    // Assert
-        //    Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
-        //}
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, resultado.StatusCode);
+        }
     }
 }

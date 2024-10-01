@@ -17,7 +17,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -68,6 +68,28 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         .HasName("pk_contato");
 
                     b.ToTable("contato", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("86eb986d-cf80-4cd5-871d-a4c218d71c3b"),
+                            DDD = 11,
+                            Dt_Registro = new DateTime(2024, 9, 30, 21, 1, 14, 529, DateTimeKind.Local).AddTicks(9316),
+                            Email = "emailtestecontato@gmail.com",
+                            Excluido = false,
+                            Nome = "Nome Teste",
+                            Telefone = "994918888"
+                        },
+                        new
+                        {
+                            Id = new Guid("593f3aaa-3122-4c87-9efa-e8399697eb6a"),
+                            DDD = 11,
+                            Dt_Registro = new DateTime(2024, 9, 30, 21, 1, 14, 529, DateTimeKind.Local).AddTicks(9334),
+                            Email = "emailtestecontatoexcluir@gmail.com",
+                            Excluido = false,
+                            Nome = "Nome Teste",
+                            Telefone = "994918888"
+                        });
                 });
 
             modelBuilder.Entity("Fiap.TechChallenge.Fase1.Dominio.Entidades.DDDRegiao", b =>
@@ -115,7 +137,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d0283ed7-deb4-4660-997b-0434a655f37e"),
+                            Id = new Guid("0adf526e-2df3-48b4-85b6-214ebe5097a4"),
                             DDD = 11,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -124,7 +146,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7c649868-7606-49de-b563-ce8151e004ca"),
+                            Id = new Guid("eb654774-a9e5-4ed3-bc60-74b812bc084a"),
                             DDD = 12,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -133,7 +155,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9641bf0f-6537-4b88-bba7-6e14d23a1296"),
+                            Id = new Guid("ec2e08bc-7f8b-43ca-94bc-9eeeea0b495a"),
                             DDD = 13,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -142,7 +164,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6f2334b8-c64a-4c7f-bccb-5368b7e07850"),
+                            Id = new Guid("6d2d1a52-bb16-416f-b162-1ce7e75506ea"),
                             DDD = 14,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -151,7 +173,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("291fa44c-1efb-40fa-a423-e63af1ae1588"),
+                            Id = new Guid("d1be4e86-41bb-459f-b987-b2220760ab79"),
                             DDD = 15,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -160,7 +182,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b9b56f96-638c-4fe0-910f-9d63169ec66f"),
+                            Id = new Guid("fcea6a50-4147-45e8-ae5a-89e137ed953a"),
                             DDD = 16,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -169,7 +191,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aedad9ff-19b8-4521-9e8b-e9e4c38d9efa"),
+                            Id = new Guid("258c3c3b-f57f-4b37-b1e0-e1a69d3b76df"),
                             DDD = 17,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -178,7 +200,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa025bf5-72a1-4e42-9d62-74da8269faad"),
+                            Id = new Guid("4f334349-02a9-47d0-93ac-25d2b1e2844a"),
                             DDD = 18,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -187,7 +209,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9341379d-f603-41aa-8420-929ea7dbd765"),
+                            Id = new Guid("2ae4c903-71fd-4173-9885-3c4805e3d635"),
                             DDD = 19,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SP",
@@ -196,7 +218,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1c47334-75e7-4dc1-9330-b6d25feca275"),
+                            Id = new Guid("fe5b26de-fdae-4b40-9771-26abd5f9daef"),
                             DDD = 21,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RJ",
@@ -205,7 +227,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d6657289-a2c9-4c99-ad47-7dee89134657"),
+                            Id = new Guid("02141d90-ee27-4c21-a159-b08fc04c91a0"),
                             DDD = 22,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RJ",
@@ -214,7 +236,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1dba5499-c79a-45d8-944f-2a31d44b2db4"),
+                            Id = new Guid("a9378581-05a5-4afb-bcfb-d2d3b9a96dbf"),
                             DDD = 24,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RJ",
@@ -223,7 +245,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("74762c74-7817-4cb8-a2b9-59c67de4f8ee"),
+                            Id = new Guid("53dec7d5-e7b8-410f-8d52-5e996d01d4b1"),
                             DDD = 27,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "ES",
@@ -232,7 +254,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("464348a3-cdc0-420c-a06b-5097c64e97e3"),
+                            Id = new Guid("1de6ebb4-cc56-4a15-abe6-b05310687d21"),
                             DDD = 28,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "ES",
@@ -241,7 +263,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("25096d96-30c9-4770-bdc1-7de8c3183560"),
+                            Id = new Guid("1ddd58d6-a3a3-418c-8150-872394d05ec5"),
                             DDD = 31,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -250,7 +272,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b0a89fca-ac8a-4c01-9cda-3755630a4806"),
+                            Id = new Guid("82d401c4-f05f-48b1-807f-959ddbdd4164"),
                             DDD = 32,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -259,7 +281,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("deb639d1-f214-40db-b33b-1244728edbf9"),
+                            Id = new Guid("f370e818-cff7-4ef3-8344-c415d4aaeb78"),
                             DDD = 33,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -268,7 +290,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d82eb6cb-dbb2-47dd-909a-d279c219bb80"),
+                            Id = new Guid("92a6f2c7-6ea2-44da-bfb8-ee8ec8ffabf7"),
                             DDD = 34,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -277,7 +299,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("87811452-13c0-4b59-96cd-6df082c7ee2c"),
+                            Id = new Guid("9b477ba9-b933-4c21-b311-9159b94747a4"),
                             DDD = 35,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -286,7 +308,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ee9e419f-4f12-4419-ad77-72335f794cd4"),
+                            Id = new Guid("7a3ab5e5-0a1c-4de4-b43b-cdd1f3d6c6f8"),
                             DDD = 37,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -295,7 +317,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e021f153-b6da-40e7-bdcb-c0c50d82e855"),
+                            Id = new Guid("3dbe3377-3905-4276-953e-b0f029c1b271"),
                             DDD = 38,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MG",
@@ -304,7 +326,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("614de0d3-d4f2-4e80-aece-199361abda81"),
+                            Id = new Guid("58f1e436-7a17-456b-a90e-340b7471d641"),
                             DDD = 41,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PR",
@@ -313,7 +335,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("440a243e-606f-435d-ba02-74b61309364b"),
+                            Id = new Guid("e77abdaf-04f7-405d-88de-e58469303aa3"),
                             DDD = 42,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SC",
@@ -322,7 +344,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d073f867-5a50-4d9d-a5e9-b24a9229e154"),
+                            Id = new Guid("cb716157-5cd0-41f2-b40f-8ae5a8ce9fb1"),
                             DDD = 43,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PR",
@@ -331,7 +353,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8e974c0a-68ef-4d6d-b636-8c518bef4d68"),
+                            Id = new Guid("50267298-a0f9-4b25-aa63-faa49580bf90"),
                             DDD = 44,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PR",
@@ -340,7 +362,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("17fb9598-789e-47df-9aea-e29825116e6f"),
+                            Id = new Guid("14f86c86-91a5-41f2-8ae2-cd37755b0679"),
                             DDD = 45,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PR",
@@ -349,7 +371,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a743f97a-f521-42ef-87d2-3008ea8f8ede"),
+                            Id = new Guid("522b2daa-856c-4042-816b-fe208ce0c83a"),
                             DDD = 46,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PR",
@@ -358,7 +380,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc438da4-ea1a-4749-8df3-21ec4f8de995"),
+                            Id = new Guid("6e61e421-267a-492f-a939-b4db57004dc2"),
                             DDD = 47,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SC",
@@ -367,7 +389,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("227f09c0-c9b0-4579-808c-a077bb33e2ef"),
+                            Id = new Guid("4a24d169-dd16-424f-a3c8-853662f4e9a4"),
                             DDD = 48,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SC",
@@ -376,7 +398,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d93c6f59-cb6e-42cb-a2ed-2992421dd816"),
+                            Id = new Guid("fb14b573-ffc6-493b-ba01-b972b36b2bd4"),
                             DDD = 49,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SC",
@@ -385,7 +407,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("27fdd19d-9858-461c-8d2a-559b30e24065"),
+                            Id = new Guid("655cc3e2-19f5-4d35-a1e7-dccaf5de43fc"),
                             DDD = 51,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RS",
@@ -394,7 +416,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("108dba40-7e13-4012-b068-223adf7d5fff"),
+                            Id = new Guid("8e754872-5761-45fe-99f8-7868f294d7ca"),
                             DDD = 53,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RS",
@@ -403,7 +425,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("513fc74f-b3e1-4630-802e-6007cdd3b0a5"),
+                            Id = new Guid("ca624b1c-f84c-4709-bba2-b4311d4af466"),
                             DDD = 54,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RS",
@@ -412,7 +434,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fd608682-0516-452b-abe4-bfa84ecf7320"),
+                            Id = new Guid("0325c6c8-873c-4598-83cd-3affb19d825d"),
                             DDD = 55,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RS",
@@ -421,7 +443,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c85b82e1-5a55-4bc7-81e2-3abab28a96b6"),
+                            Id = new Guid("42c867a7-40d7-4844-ba1c-729b5426d196"),
                             DDD = 61,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "DF",
@@ -430,7 +452,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c1cb9987-53b2-4c83-8a13-7b509a98e457"),
+                            Id = new Guid("bf4c4e07-6e73-4afb-be34-08dfb3e5d7ca"),
                             DDD = 62,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "GO",
@@ -439,7 +461,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("79d79914-9b6d-4b5d-9a9b-17cd65db305a"),
+                            Id = new Guid("a18d59a1-6dcc-4dd6-b5d5-593eb81f0407"),
                             DDD = 63,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "TO",
@@ -448,7 +470,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4efb4b70-a1df-44d6-9476-dfb329e6415f"),
+                            Id = new Guid("be977955-3c58-43c7-9273-d8c60bb3ac3a"),
                             DDD = 64,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "GO",
@@ -457,7 +479,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dedbb954-190d-443a-8e5c-6f18dce139df"),
+                            Id = new Guid("b2f55cde-2428-4e06-9709-3be6bd1996dd"),
                             DDD = 65,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MT",
@@ -466,7 +488,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a5499b54-cd1d-4ee7-a2fb-0ca1e6c4d382"),
+                            Id = new Guid("aaf52dc9-7ddb-4d14-87bb-5589679b3fca"),
                             DDD = 66,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MT",
@@ -475,7 +497,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5ffcc6e2-82ab-49d4-bf77-8b18c24e0fa7"),
+                            Id = new Guid("1a28b3f7-d105-42f5-b95b-d3b0dcd857a9"),
                             DDD = 67,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MS",
@@ -484,7 +506,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9e381f5d-4a59-422d-acb0-ab7e53f20904"),
+                            Id = new Guid("440b5879-8edf-46fa-ab82-a05573ec7a7b"),
                             DDD = 68,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "AC",
@@ -493,7 +515,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7e5e0638-d60f-4702-8886-4ddfe245fa27"),
+                            Id = new Guid("ec84189f-f231-4a25-b09d-3d1130608aa0"),
                             DDD = 69,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RO",
@@ -502,7 +524,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("657f655c-cf9a-4334-bf14-31e60a9c0823"),
+                            Id = new Guid("d202d8c8-a3a1-4bfc-a7fc-7b9dba399c65"),
                             DDD = 71,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "BA",
@@ -511,7 +533,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ee10b9f8-accf-412c-acad-17f97df8a3fb"),
+                            Id = new Guid("7611348d-3bfb-4aaa-9f19-0c006af03b1e"),
                             DDD = 73,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "BA",
@@ -520,7 +542,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d80e3aef-254d-4503-9ea6-433758ff00e0"),
+                            Id = new Guid("fa36fc91-f42f-414e-83a0-5aa5afc0da3a"),
                             DDD = 74,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "BA",
@@ -529,7 +551,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0fc6472f-a2f1-47f5-ac6c-dfe15fbdb689"),
+                            Id = new Guid("7adf6121-6c68-41bb-ac5d-c344d3c63dc9"),
                             DDD = 75,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "BA",
@@ -538,7 +560,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c6685d3e-79ea-414c-8769-f4324a2b3fc0"),
+                            Id = new Guid("e479c83d-0151-4692-8d4b-b02fda7e726f"),
                             DDD = 77,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "BA",
@@ -547,7 +569,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("385cf7e5-f2ce-4803-afd5-ca627e35ffb8"),
+                            Id = new Guid("be3a017e-230d-4c1e-a62e-fb852d7a0991"),
                             DDD = 79,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "SE",
@@ -556,7 +578,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("732cfc8d-e90d-4140-9486-6e188b1e9c9a"),
+                            Id = new Guid("6f909d57-cfb8-4b3e-a42a-a58718c14704"),
                             DDD = 81,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PE",
@@ -565,7 +587,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("baf94171-2dc4-4dfd-a20c-1169931a9ad3"),
+                            Id = new Guid("dab3b7ac-4606-404f-99f4-1a926e3dbac6"),
                             DDD = 82,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "AL",
@@ -574,7 +596,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("80313aa7-037e-41bd-aecd-6f221722546d"),
+                            Id = new Guid("cff4af55-50b1-4985-81cd-c2bb8c9cc75f"),
                             DDD = 83,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PB",
@@ -583,7 +605,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4ffdc9f3-2e5e-4aa6-9f5c-3df354a5b8aa"),
+                            Id = new Guid("80b05b1c-b8d4-4999-bead-11d523670a19"),
                             DDD = 84,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RN",
@@ -592,7 +614,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a91de642-bf3d-4f2f-882a-9e573baf56ae"),
+                            Id = new Guid("f58bd18c-c43a-40d4-9859-f83e03c956e6"),
                             DDD = 85,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "CE",
@@ -601,7 +623,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e1dec228-fc21-4d78-9833-ffa705dcc572"),
+                            Id = new Guid("cc158567-2a21-4d71-b26a-19ae532fa6c8"),
                             DDD = 86,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PI",
@@ -610,7 +632,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cb7524c1-a3cf-42c7-9cb0-23c7f8a410f0"),
+                            Id = new Guid("84e2593e-2aeb-44ae-b472-fc213ea2ab22"),
                             DDD = 87,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PE",
@@ -619,7 +641,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7cfbc556-05fc-4f59-979a-8de63fe6c7dd"),
+                            Id = new Guid("c4609e05-9921-48e6-aa8a-6da66a7ea3a5"),
                             DDD = 88,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "CE",
@@ -628,7 +650,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("28f4fd3c-fb24-4c5f-bd7b-47751ae6848d"),
+                            Id = new Guid("36ab7481-3dd5-473d-8a27-ab6d0392fa57"),
                             DDD = 89,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PI",
@@ -637,7 +659,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bd733945-3426-45d9-a602-71f9631503e6"),
+                            Id = new Guid("7cb63460-7589-4590-b2ea-9cfa35365d56"),
                             DDD = 91,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PA",
@@ -646,7 +668,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("34d45c85-714d-40ca-8adc-553ddc2359ab"),
+                            Id = new Guid("2044111b-137d-4c4d-9d9c-2290ece0b81c"),
                             DDD = 92,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "AM",
@@ -655,7 +677,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3cc34a5f-8fe2-4d29-837e-02f23404bf44"),
+                            Id = new Guid("f1e3ca99-5c8f-4b2c-a45d-d465477b9796"),
                             DDD = 93,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PA",
@@ -664,7 +686,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f16b043b-3435-47b2-91e6-1f62e92f79c4"),
+                            Id = new Guid("a7218739-47b9-4906-840d-58ec28726be5"),
                             DDD = 94,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "PA",
@@ -673,7 +695,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3cb5ab44-4203-4784-905b-f97636fe912b"),
+                            Id = new Guid("6962f7e1-deca-4e4c-a431-3a94d40949d4"),
                             DDD = 95,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "RR",
@@ -682,7 +704,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("93ad63cf-e449-452b-b584-545d2243b72c"),
+                            Id = new Guid("2098e0da-7664-4075-9630-4ff54a331efb"),
                             DDD = 96,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "AP",
@@ -691,7 +713,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("90040e40-4dc8-4dcb-84fc-f69558a8c392"),
+                            Id = new Guid("7edaaae2-c4b6-4c1b-937e-5ef7707d902d"),
                             DDD = 97,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "AM",
@@ -700,7 +722,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("60ef67dd-8de6-4cd7-99ba-4ad3c1537933"),
+                            Id = new Guid("576ac670-3e38-4978-ae4d-b46ff4c694d3"),
                             DDD = 98,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MA",
@@ -709,7 +731,7 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ae9a3bd5-5ab5-44c1-a497-7e000cf7fa23"),
+                            Id = new Guid("9b51e5fb-ae32-4fad-9d6e-e5e9209521a4"),
                             DDD = 99,
                             Dt_Registro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Estado = "MA",
@@ -768,11 +790,21 @@ namespace Fiap.TechChallenge.Fase1.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8e735ee9-b5d0-482a-9377-59c03b78ca98"),
-                            Dt_Registro = new DateTime(2024, 7, 25, 20, 20, 25, 378, DateTimeKind.Local).AddTicks(7627),
+                            Id = new Guid("fed93faa-e3dc-4539-bf5d-24b0e2af602d"),
+                            Dt_Registro = new DateTime(2024, 9, 30, 21, 1, 14, 529, DateTimeKind.Local).AddTicks(9265),
                             Email = "admin@gmail.com",
                             Excluido = false,
                             Nome = "Administrador",
+                            Role = (short)0,
+                            Senha = "$2b$12$/nj7LJgiUFp32SZ9A2A98e83JwjOtWPhOLTnplHMCRQqKfqGHAmVS"
+                        },
+                        new
+                        {
+                            Id = new Guid("72c0b29c-9b9a-4233-b8be-d82af9381b69"),
+                            Dt_Registro = new DateTime(2024, 9, 30, 21, 1, 14, 529, DateTimeKind.Local).AddTicks(9296),
+                            Email = "emailtesteusuario@gmail.com",
+                            Excluido = false,
+                            Nome = "Usuario",
                             Role = (short)0,
                             Senha = "$2b$12$/nj7LJgiUFp32SZ9A2A98e83JwjOtWPhOLTnplHMCRQqKfqGHAmVS"
                         });
