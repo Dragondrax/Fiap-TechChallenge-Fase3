@@ -1,5 +1,5 @@
 # Fiap-TechChallenge-Fase3
-Esse projeto foi desenvolvido com intuito de colocar em prática todos os conceitos aprendidos na Fase 2 da Pós Graduação da FIAP.
+Esse projeto foi desenvolvido com intuito de colocar em prática todos os conceitos aprendidos na Fase 3 da Pós Graduação da FIAP.
 
 |Alunos| E-mail|
 |------|-------|
