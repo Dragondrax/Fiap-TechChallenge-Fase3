@@ -92,6 +92,7 @@ Foi realizado testes de integração utilizando xUnit, Docker e Postgres.
 - FluentValidattor
 - Entity Framework
 - Bogus
+- RabbitMQ
 - Moq
 - DotNet 8.0
 - BCrypt
